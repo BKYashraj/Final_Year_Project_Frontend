@@ -12,7 +12,7 @@ const FactoryList = () => {
     //yashraj
   });
 
-  const [account, setAccount] = useState("Not connected");
+  const [account, setAccount] = useState("Not cyyyyuyiiuionnected");
 
   useEffect(() => {
     const setup = async () => {
