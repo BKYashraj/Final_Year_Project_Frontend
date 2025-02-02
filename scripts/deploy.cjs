@@ -20,6 +20,7 @@ async function main() {
 main().catch((error) => {
     console.error("Error deploying contract:", error);
     process.exitCode = 1;
+    // Yashraj
 });
 
 
