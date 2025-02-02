@@ -47,12 +47,26 @@ function LoginPresentation() {
     //   return;
     // }
 
+    // const apiResponse = await dispatch(login(signInState));
+
+    // console.log(apiResponse);
+    // if (apiResponse.payload.data.success) {
+    //   // toast.success("Login successful!");
+    //   navigate("/farmer");
+    // }
+
+
     const apiResponse = await dispatch(login(signInState));
 
-    console.log(apiResponse);
+    const role = apiResponse.payload.data.data.userRole;
+
+   
+   
     if (apiResponse.payload.data.success) {
       // toast.success("Login successful!");
-      navigate("/farmer");
+      console.log(role);
+      if(role === 'Farmer') navigate("/farmer");
+      else if(role === 'Ethanol Producing Factory')   navigate("/factory");
     }
   }
 
