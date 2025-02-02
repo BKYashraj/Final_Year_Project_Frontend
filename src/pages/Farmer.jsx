@@ -9,6 +9,7 @@ const FactoryList = () => {
     provider: null,
     signer: null,
     contract: null,
+    //yashraj
   });
 
   const [account, setAccount] = useState("Not connected");
