@@ -49,7 +49,7 @@ const ReceiptGenerator = ({ transactionHash, provider }) => {
     doc.text(`To (Distributor): ${receipt.to}`, 14, 60);
     doc.text(`Ethanol Quantity (tons): 200`, 14, 70);
     doc.text(`Price per Ton (ETH): 40`, 14, 80);
-    doc.text(`Total Payable Amount: 0.034 ETH`, 14, 90);
+    doc.text(`Total Payable Amount: 200 * 40 = 8000 = 0.034 ETH`, 14, 90);
     doc.text(`Gas Used: ${receipt.gasUsed.toString()}`, 14, 100);
     doc.text(`Transaction Status: Confirmed`, 14, 110);
     doc.text(`Timestamp: 2024-02-03 14:30 UTC`, 14, 120);
@@ -111,7 +111,7 @@ const ReceiptGenerator = ({ transactionHash, provider }) => {
           <div className="grid grid-cols-2 gap-4 bg-gray-50 p-4 rounded-lg">
             <div>
               <p className="text-sm text-gray-500">Total Payable Amount</p>
-              <p className="font-semibold text-gray-900">0.034 ETH</p>
+              <p className="font-semibold text-gray-900">200 * 40 = ₹ 8000 = 0.034 ETH</p>
             </div>
             <div>
               <p className="text-sm text-gray-500">Gas Used</p>
