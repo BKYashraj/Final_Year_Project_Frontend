@@ -3,6 +3,7 @@ import abi from "../contractJson/FarmerToFactory.json";
 // import { ethers } from 'ethers';
 import { ethers } from "ethers";
 import toast from "react-hot-toast";
+import ReceiptGenerator from "./ReceiptGenerator";
 
 const FactoryList = () => {
   const [state, setState] = useState({
@@ -12,8 +13,9 @@ const FactoryList = () => {
     //yashraj
   });
 
-  const [account, setAccount] = useState("Not cyyyyuyiiuionnected");
-
+  const [account, setAccount] = useState("Not connected");
+  const [transactionHash, setTransactionHash] = useState(null);
+  const [showPopup, setShowPopup] = useState(false); // Track visibility of the popup
   useEffect(() => {
     const setup = async () => {
       const contractAddress = "0xA2Fb97586Cb2996D2140Bc42f0D852b9D6533C6A";
@@ -51,54 +53,58 @@ const FactoryList = () => {
     setup();
   }, []);
 
-const a = async (event) => {
-  event.preventDefault();
-  const { contract } = state;
 
-  if (!contract) {
-    console.error("Contract not initialized");
-    alert("Contract not initialized. Please connect your wallet.");
-    return;
-  }
 
-  
-  try {
-    const factoryAddress = "0x2A6E75985EF4280fC823dcdb9cE7946Cb5A67e9c"; // Replace with actual address
-    // 
-    // 0xFAae2E0bE213629F62D352CFa2cbF1fa7Eab268e
-    // const ton = {value:ethers.utils.parseEther("0.001")}
-    // const amount = {value:ethers.utils.parseEther("0.001")}
+  const a = async (event) => {
+    event.preventDefault();
+    const { contract } = state;
 
-    const ton = ethers.utils.parseEther("0.001"); // Direct BigNumber value
-    const amount = ethers.utils.parseEther("0.001");
+    if (!contract) {
+      console.error("Contract not initialized");
+      alert("Contract not initialized. Please connect your wallet.");
+      return;
+    }
 
-    console.log("Factory Address:", factoryAddress);
-    console.log("Ton:", ton.toString());
-    console.log("Amount:", amount.toString());
 
-    const transaction = await contract.createTransaction(
-      factoryAddress,
-      ton, // Pass `ton` directly if expected as a BigNumber
-      amount // Pass `value` as part of the overrides object
-    );
+    try {
+      const factoryAddress = "0x2A6E75985EF4280fC823dcdb9cE7946Cb5A67e9c"; // Replace with actual address
+      // 
+      // 0xFAae2E0bE213629F62D352CFa2cbF1fa7Eab268e
+      // const ton = {value:ethers.utils.parseEther("0.001")}
+      // const amount = {value:ethers.utils.parseEther("0.001")}
 
-     // Use toast.promise for waiting the transaction and showing appropriate messages
-     await toast.promise(
-      transaction.wait(), // Wait for the transaction to be mined
-      {
-        loading: "Hold back tight, we are processing your proposal...",
-        success: "Proposal sent successfully to the Factory!",
-        error: "Oops! Something went wrong. Please try again.",
-      }
-    );
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    // Optionally, reload the page after success
-    window.location.reload();
-  } catch (error) {
-    console.error("Error sending proposal:", error);
-    alert("Failed to send proposal. Please try again.");
-  }
-};
+      const ton = ethers.utils.parseEther("0.001"); // Direct BigNumber value
+      const amount = ethers.utils.parseEther("0.001");
+
+      console.log("Factory Address:", factoryAddress);
+      console.log("Ton:", ton.toString());
+      console.log("Amount:", amount.toString());
+
+      const transaction = await contract.createTransaction(
+        factoryAddress,
+        ton, // Pass `ton` directly if expected as a BigNumber
+        amount // Pass `value` as part of the overrides object
+      );
+
+      // Use toast.promise for waiting the transaction and showing appropriate messages
+      await toast.promise(
+        transaction.wait(), // Wait for the transaction to be mined
+        {
+          loading: "Hold back tight, we are processing your proposal...",
+          success: "Proposal sent successfully to the Factory!",
+          error: "Oops! Something went wrong. Please try again.",
+        }
+      );
+      setTransactionHash(transaction.hash); // Store transaction hash
+      setShowPopup(true);
+    } catch (error) {
+      console.error("Error sending proposal:", error);
+      alert("Failed to send proposal. Please try again.");
+    }
+  };
+  const closePopup = () => {
+    setShowPopup(false); // Close the popup
+  };
 
 
   // Mock data for factories
@@ -200,6 +206,30 @@ const a = async (event) => {
           ))}
         </div>
       </main>
+
+   {/* Modal Popup */}
+   {showPopup && (
+        <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 z-50">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-128 relative">
+            <button
+              onClick={closePopup}
+              className="absolute top-2 right-2 text-gray-600 text-xl z-60"
+            >
+              &times;
+            </button>
+
+            <ReceiptGenerator
+              transactionHash={transactionHash}
+              provider={state.provider}
+            />
+          </div>
+        </div>
+      )}
+
+      {/* Render ReceiptGenerator here */}
+      {transactionHash && (
+        <ReceiptGenerator transactionHash={transactionHash} provider={state.provider} />
+      )}
 
       {/* Modal */}
       {isModalOpen && selectedFactory && (
