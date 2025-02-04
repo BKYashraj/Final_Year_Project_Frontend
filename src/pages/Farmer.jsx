@@ -120,6 +120,7 @@ const FactoryList = () => {
       name: "Factory B",
       rawMaterial: "300 tons of sugarcane",
       price: "₹38/L",
+      
     },
     {
       id: 3,
