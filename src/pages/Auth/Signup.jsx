@@ -1,23 +1,72 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { createAccount } from "../../Redux/Slices/AuthSlice";
+import { createAccount, factoryCreateAccount } from "../../Redux/Slices/AuthSlice";
 import { useDispatch } from "react-redux";
 
 function Signup() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [signUpState, setSignUpState] = useState({ role: "", cropTypes: [] });
+  const [signUpState, setSignUpState] = useState({ 
+    role: "", 
+    cropTypes: [],
+    email: "",
+    password: "",
+    confirmPassword: "",
+    name: "",
+    address: "",
+    mobileNumber: "",
+    aadhar: "",
+    farmerId:"",
+    gatNo:"",
+    state:"",
+    district:"",
+    totalLandArea:"",
+    factoryName:"",
+    factoryAddress:"",
+    factoryContactPerson:"",
+    factoryContactNumber:"",
+    factoryEmail:"",
+    factoryPassword:"",
+    factoryConfirmPassword:"",
+    factoryRegNo:"",
+    factoryGstNo:"",
+    factoryTargetProduction:"",
+    factoryPreviousProduction:"",
+    storageCapacity:"",
+    existingFarmers:"",
+    factoryCropTypes: [],
+    subsidySchemes:"",
+  });
 
   function handleUserInput(e) {
     const { name, value, checked } = e.target;
     if (name === "cropTypes") {
       let updatedCrops = [...signUpState.cropTypes];
+
       if (checked) {
         updatedCrops.push(value);
       } else {
         updatedCrops = updatedCrops.filter(crop => crop !== value);
       }
       setSignUpState({ ...signUpState, [name]: updatedCrops });
+
+    } else {
+      setSignUpState({ ...signUpState, [name]: value });
+    }
+  }
+
+  function factoryHandleUserInput(e){
+    const { name, value, checked } = e.target;
+    if (name==="factoryCropTypes") {
+      let factoryUpdatedCrops = [...signUpState.factoryCropTypes];
+
+      if (checked) {
+        factoryUpdatedCrops.push(value);
+      } else {
+        factoryUpdatedCrops=factoryUpdatedCrops.filter(crop => crop !== value)
+      }
+      setSignUpState({ ...signUpState, [name]: factoryUpdatedCrops });
+
     } else {
       setSignUpState({ ...signUpState, [name]: value });
     }
@@ -26,11 +75,21 @@ function Signup() {
   async function handleFormSubmit(e) {
     e.preventDefault();
     console.log(signUpState);
-    const apiResponse = await dispatch(createAccount(signUpState));
+    let apiResponse=null;
+    if (signUpState.role === "Farmer"){
+      apiResponse = await dispatch(createAccount(signUpState));
+    }
+    else if(signUpState.role === "Factory"){
+      apiResponse = await dispatch(factoryCreateAccount(signUpState));
+
+    }
+    
     if (apiResponse.payload.data.success) {
       navigate("/auth/signin");
     }
   }
+
+  
 
   return (
     <section className="flex items-center justify-center min-h-screen bg-gray-100">
@@ -77,22 +136,22 @@ function Signup() {
             <>
               <input type="text" name="factoryName" placeholder="Factory Name" required onChange={handleUserInput} className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-yellow-300" />
               <input type="text" name="factoryAddress" placeholder="Factory Address" required onChange={handleUserInput} className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-yellow-300" />
-              <input type="text" name="contactPerson" placeholder="Contact Person Name" required onChange={handleUserInput} className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-yellow-300" />
-              <input type="tel" name="contactNumber" placeholder="Contact Number" required onChange={handleUserInput} className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-yellow-300" />
-              <input type="email" name="email" placeholder="Email ID" required onChange={handleUserInput} className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-yellow-300" />
-              <input type="password" name="password" placeholder="Password" required onChange={handleUserInput} className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-yellow-300" />
-              <input type="password" name="confirmPassword" placeholder="Confirm Password" required onChange={handleUserInput} className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-yellow-300" />
+              <input type="text" name="factoryContactPerson" placeholder="Contact Person Name" required onChange={handleUserInput} className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-yellow-300" />
+              <input type="tel" name="factoryContactNumber" placeholder="Contact Number" required onChange={handleUserInput} className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-yellow-300" />
+              <input type="email" name="factoryEmail" placeholder="Email ID" required onChange={handleUserInput} className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-yellow-300" />
+              <input type="password" name="factoryPassword" placeholder="Password" required onChange={handleUserInput} className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-yellow-300" />
+              <input type="password" name="factoryConfirmPassword" placeholder="Confirm Password" required onChange={handleUserInput} className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-yellow-300" />
               <input type="text" name="factoryRegNo" placeholder="Factory Registration Number" required onChange={handleUserInput} className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-yellow-300" />
-              <input type="text" name="gstNo" placeholder="GST Number" required onChange={handleUserInput} className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-yellow-300" />
-              <input type="text" name="targetProduction" placeholder="Target Production (in tons)" required onChange={handleUserInput} className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-yellow-300" />
-              <input type="text" name="previousProduction" placeholder="Previous Year Production (in tons)" required onChange={handleUserInput} className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-yellow-300" />
+              <input type="text" name="factoryGstNo" placeholder="GST Number" required onChange={handleUserInput} className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-yellow-300" />
+              <input type="text" name="factoryTargetProduction" placeholder="Target Production (in tons)" required onChange={handleUserInput} className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-yellow-300" />
+              <input type="text" name="factoryPreviousProduction" placeholder="Previous Year Production (in tons)" required onChange={handleUserInput} className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-yellow-300" />
               <input type="text" name="storageCapacity" placeholder="Storage Capacity (in tons)" required onChange={handleUserInput} className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-yellow-300" />
               <input type="text" name="existingFarmers" placeholder="Number of Existing Farmers" required onChange={handleUserInput} className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-yellow-300" />
               <div className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-yellow-300">
                 <label className="block mb-2 font-medium text-gray-700">Select Types of Crops Used</label>
                 {['Sugarcane', 'Maize', 'Sorghum', 'Wheat', 'Barley', 'Corn', 'Banana Pseudo Stem'].map((crop) => (
                   <div key={crop} className="flex items-center gap-2">
-                    <input type="checkbox" name="cropTypes" value={crop} onChange={handleUserInput} checked={signUpState.cropTypes.includes(crop)} />
+                    <input type="checkbox" name="factoryCropTypes" value={crop} onChange={factoryHandleUserInput} checked={signUpState.factoryCropTypes.includes(crop)} />
                     <label>{crop}</label>
                   </div>
                 ))}
