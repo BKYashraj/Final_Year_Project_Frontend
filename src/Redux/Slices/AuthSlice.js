@@ -57,6 +57,27 @@ export const factoryCreateAccount = createAsyncThunk(
   }
 );
 
+export const distributorCreateAccount = createAsyncThunk(
+  "auth/distributorCreateAccount",
+  async (data) => {
+    try {
+      const response = axiosInstance.post("/distributor", data);
+      console.log("I am here")
+      toast.promise(response, {
+        loading: "Hold back tight, we are registering your id...",
+        success: "Account created successfully",
+        error: "Ohh No!, something went wrong. Please try again",
+      });
+
+      const apiResponse = await response;
+      console.log("My response", apiResponse);
+      return apiResponse;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
 export const login = createAsyncThunk("auth/login", async (data) => {
   console.log("incoming data to the thunk", data);
   try {

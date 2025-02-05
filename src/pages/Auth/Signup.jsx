@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { createAccount, factoryCreateAccount } from "../../Redux/Slices/AuthSlice";
+import { createAccount, distributorCreateAccount, factoryCreateAccount } from "../../Redux/Slices/AuthSlice";
 import { useDispatch } from "react-redux";
 
 function Signup() {
@@ -36,6 +36,20 @@ function Signup() {
     existingFarmers:"",
     factoryCropTypes: [],
     subsidySchemes:"",
+    distributorName:"",
+    distributorAddress:"",
+    distributorContactPerson:"",
+    distributorContactNo:"",
+    distributorEmail:"",
+    distributorPassword:"",
+    distributorConfirmPassword:"",
+    distributorRegNo:"",
+    distributorGstNo:"",
+    monthlyEthanolRequirement:"",
+    licenses:"",
+    existingFactories:"",
+    productsRequiringEthanol:"",
+    prefferedEthanolType:"",
   });
 
   function handleUserInput(e) {
@@ -81,6 +95,10 @@ function Signup() {
     }
     else if(signUpState.role === "Factory"){
       apiResponse = await dispatch(factoryCreateAccount(signUpState));
+
+    }
+    else if(signUpState.role === "Distributor"){
+      apiResponse = await dispatch(distributorCreateAccount(signUpState));
 
     }
     
@@ -161,24 +179,48 @@ function Signup() {
           )}
 
 
-          {signUpState.role === "Distributor" && (
-            <>
-              <input type="text" name="distributorName" placeholder="Distributor Name" required onChange={handleUserInput} className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-yellow-300" />
-              <input type="text" name="distributorAddress" placeholder="Distributor Address" required onChange={handleUserInput} className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-yellow-300" />
-              <input type="text" name="contactPerson" placeholder="Contact Person Name" required onChange={handleUserInput} className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-yellow-300" />
-              <input type="tel" name="contactNumber" placeholder="Contact Number" required onChange={handleUserInput} className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-yellow-300" />
-              <input type="email" name="email" placeholder="Email ID" required onChange={handleUserInput} className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-yellow-300" />
-              <input type="password" name="password" placeholder="Password" required onChange={handleUserInput} className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-yellow-300" />
-              <input type="password" name="confirmPassword" placeholder="Confirm Password" required onChange={handleUserInput} className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-yellow-300" />
-              <input type="text" name="distributorRegNo" placeholder="Distributor Registration Number" required onChange={handleUserInput} className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-yellow-300" />
-              <input type="text" name="gstNo" placeholder="GST Number" required onChange={handleUserInput} className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-yellow-300" />
-              <input type="text" name="productsRequiringEthanol" placeholder="Products Requiring Ethanol (Petroleum, Pharmaceuticals, Beverages, Chemicals, etc.)" required onChange={handleUserInput} className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-yellow-300" />
-              <input type="text" name="monthlyEthanolRequirement" placeholder="Monthly Ethanol Requirement (in liters/tons)" required onChange={handleUserInput} className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-yellow-300" />
-              <input type="text" name="preferredEthanolType" placeholder="Preferred Ethanol Type (Anhydrous, Hydrous, Bioethanol, etc.)" required onChange={handleUserInput} className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-yellow-300" />
-              <input type="text" name="licenses" placeholder="Licenses & Compliance Approvals (Excise License, Pollution Control, etc.)" required onChange={handleUserInput} className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-yellow-300" />
-              <input type="text" name="existingFactories" placeholder="Number of Existing Factories" required onChange={handleUserInput} className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-yellow-300" />
-            </>
-          )}
+{signUpState.role === "Distributor" && (
+  <>
+    <input type="text" name="distributorName" placeholder="Distributor Name" required onChange={handleUserInput} className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-yellow-300" />
+    <input type="text" name="distributorAddress" placeholder="Distributor Address" required onChange={handleUserInput} className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-yellow-300" />
+    <input type="text" name="distributorContactPerson" placeholder="Contact Person Name" required onChange={handleUserInput} className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-yellow-300" />
+    <input type="tel" name="distributorContactNumber" placeholder="Contact Number" required onChange={handleUserInput} className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-yellow-300" />
+    <input type="email" name="distributorEmail" placeholder="Email ID" required onChange={handleUserInput} className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-yellow-300" />
+    <input type="password" name="distributorPassword" placeholder="Password" required onChange={handleUserInput} className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-yellow-300" />
+    <input type="password" name="distributorConfirmPassword" placeholder="Confirm Password" required onChange={handleUserInput} className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-yellow-300" />
+    <input type="text" name="distributorRegNo" placeholder="Distributor Registration Number" required onChange={handleUserInput} className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-yellow-300" />
+    <input type="text" name="distributorGstNo" placeholder="GST Number" required onChange={handleUserInput} className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-yellow-300" />
+
+    <input type="text" name="monthlyEthanolRequirement" placeholder="Monthly Ethanol Requirement (in liters/tons)" required onChange={handleUserInput} className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-yellow-300" />
+    <input type="text" name="licenses" placeholder="Licenses & Compliance Approvals (Excise License, Pollution Control, etc.)" required onChange={handleUserInput} className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-yellow-300" />
+    <input type="text" name="existingFactories" placeholder="Number of Existing Factories" required onChange={handleUserInput} className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-yellow-300" />
+
+    {/* Multiple Choice: Products Requiring Ethanol */}
+    <label className="block font-semibold mt-2">Products Requiring Ethanol</label>
+    <div className="grid grid-cols-2 gap-2">
+      {["Petroleum", "Pharmaceuticals", "Beverages", "Chemicals", "Cosmetics"].map((product) => (
+        <label key={product} className="flex items-center">
+          <input type="checkbox" name="productsRequiringEthanol" value={product} onChange={handleUserInput} className="mr-2" />
+          {product}
+        </label>
+      ))}
+    </div>
+
+
+    {/* Multiple Choice: Preferred Ethanol Type */}
+    <label className="block font-semibold mt-2">Preferred Ethanol Type</label>
+    <div className="grid grid-cols-2 gap-2">
+      {["Anhydrous", "Hydrous", "Bioethanol", "Synthetic Ethanol", "Denatured Ethanol", "Rectified Spirit", "Absolute Ethanol", "Fuel Ethanol"].map((type) => (
+        <label key={type} className="flex items-center">
+          <input type="checkbox" name="preferredEthanolType" value={type} onChange={handleUserInput} className="mr-2" />
+          {type}
+        </label>
+      ))}
+    </div>
+
+  </>
+)}
+
 
           <button type="submit" className="w-full px-6 py-3 font-medium text-white bg-yellow-500 rounded-lg hover:bg-yellow-600">Create Account</button>
         </form>

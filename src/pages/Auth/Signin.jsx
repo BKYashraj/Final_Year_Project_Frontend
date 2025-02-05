@@ -66,6 +66,7 @@ function LoginPresentation() {
       // toast.success("Login successful!");
       console.log(role);
       
+      
       if(role === 'Farmer') navigate("/farmer");
       else if(role === 'Ethanol Producing Factory')   navigate("/factory");
       else if(role === 'Distributers')   navigate("/distributer");
