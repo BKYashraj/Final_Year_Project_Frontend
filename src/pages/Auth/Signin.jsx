@@ -68,7 +68,7 @@ function LoginPresentation() {
       
       
       if(role === 'Farmer') navigate("/farmer");
-      else if(role === 'Ethanol Producing Factory')   navigate("/factory");
+      else if(role === 'Ethanol Producing Factory')   navigate("/factory/factoryMenu");
       else if(role === 'Distributers')   navigate("/distributer");
     }
   }
