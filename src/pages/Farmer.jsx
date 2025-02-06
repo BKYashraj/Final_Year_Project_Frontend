@@ -4,6 +4,10 @@ import abi from "../contractJson/FarmerToFactory.json";
 import { ethers } from "ethers";
 import toast from "react-hot-toast";
 import ReceiptGenerator from "./ReceiptGenerator";
+// import FactoryMenu from "./FactoryF/FactoryMenu";
+import FactoryAcceptedFarmerMenu from "./FarmerRelated/FactoryAcceptedFarmerMenu";
+import axiosInstance from "../Helper/axiosInstance";
+import { useSelector } from "react-redux";
 
 const FactoryList = () => {
   const [state, setState] = useState({
@@ -16,6 +20,21 @@ const FactoryList = () => {
   const [account, setAccount] = useState("Not connected");
   const [transactionHash, setTransactionHash] = useState(null);
   const [showPopup, setShowPopup] = useState(false); // Track visibility of the popup
+
+
+
+  const [factories, setFactories] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+
+  const [selectedFactory, setSelectedFactory] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Form state
+  const [formData, setFormData] = useState({ quantity: "", deliveryDate: "" });
+
+
   useEffect(() => {
     const setup = async () => {
       const contractAddress = "0xA2Fb97586Cb2996D2140Bc42f0D852b9D6533C6A";
@@ -107,41 +126,37 @@ const FactoryList = () => {
   };
 
 
-  // Mock data for factories
-  const [factories, setFactories] = useState([
-    {
-      id: 1,
-      name: "Factory A",
-      rawMaterial: "500 tons of sugarcane",
-      price: "₹40/L",
-    },
-    {
-      id: 2,
-      name: "Factory B",
-      rawMaterial: "300 tons of sugarcane",
-      price: "₹38/L",
-      
-    },
-    {
-      id: 3,
-      name: "Factory C",
-      rawMaterial: "600 tons of sugarcane",
-      price: "₹42/L",
-    },
-    {
-      id: 4,
-      name: "Factory D",
-      rawMaterial: "400 tons of sugarcane",
-      price: "₹40/L",
-    },
-  ]);
 
-  // Modal state
-  const [selectedFactory, setSelectedFactory] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Form state
-  const [formData, setFormData] = useState({ quantity: "", deliveryDate: "" });
+
+  const farmerData = useSelector((state) => state.auth.data);
+  const farmerId = farmerData.id;
+
+  const getApprovedFactories = async () => {
+    setLoading(true);
+    try {
+      const response = await axiosInstance.get(`/farmers/${farmerId}`);
+      console.log(response);
+      setFactories(response.data.data.factories);
+    } catch (error) {
+      console.error("Error fetching approved factories:", error);
+      setError("Failed to load approved factories.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getApprovedFactories();
+  }, []);
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>{error}</p>;
+  }
 
   // Open modal with selected factory
   const openModal = (factory) => {
@@ -179,12 +194,36 @@ const FactoryList = () => {
         </div>
       </header>
 
+      {/* <FactoryAcceptedFarmerMenu /> */}
+
       {/* Factory List */}
       <main className="container mx-auto px-4 py-6">
         <h1 className="text-xl mb-4 font-bold">
           Connected Account - {account}
         </h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <h1 className="text-xl mb-4 font-bold">
+          Request From Factories
+        </h1>
+
+        {factories.map((factory) => (
+          <div key={factory._id} className="border border-gray-300 rounded-lg shadow-md p-4 bg-white">
+            <h2 className="text-xl font-semibold text-gray-800">{factory.factoryName}</h2>
+            <p className="text-gray-600 mt-2"><strong>Address:</strong> {factory.factoryAddress}</p>
+            <p className="text-gray-600"><strong>Contact Person:</strong> {factory.contactPersonName}</p>
+            <p className="text-gray-600"><strong>GST Number:</strong> {factory.gstNumber}</p>
+            <p className="text-gray-600"><strong>Types of Crops Used:</strong> {factory.typesOfCropsUsed.join(', ')}</p>
+            <p className="text-gray-600"><strong>Subsidy or Incentive Schemes:</strong> {factory.subsidyOrIncentiveSchemes}</p>
+            <button
+              className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+              onClick={() => openModal(factory)}
+            >
+              Send Proposal
+            </button>
+          </div>
+        ))}
+
+        {/* <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {factories.map((factory) => (
             <div
               key={factory.id}
@@ -203,13 +242,13 @@ const FactoryList = () => {
               >
                 Send Proposal
               </button>
-            </div>
-          ))}
-        </div>
+            </div> */}
+        {/* ))} */}
+        {/* </div> */}
       </main>
 
-   {/* Modal Popup */}
-   {showPopup && (
+      {/* Modal Popup */}
+      {showPopup && (
         <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 z-50">
           <div className="bg-white p-6 rounded-lg shadow-lg w-128 relative">
             <button

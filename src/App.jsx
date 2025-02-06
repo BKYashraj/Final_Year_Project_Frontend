@@ -16,7 +16,7 @@ export default function App() {
           <Route path="/auth/signin" element={<Signin />} />
           <Route path="/farmer" element={<Farmer />} />
           <Route path="/farmer" element={<Farmer />} />
-          <Route path="/factory/factoryMenu" element={<FactoryMenu />} />
+          <Route path="/factory" element={<FactoryMenu />} />
           <Route path="/distributer" element={<Distributers />} />
       </Routes>
     </>
