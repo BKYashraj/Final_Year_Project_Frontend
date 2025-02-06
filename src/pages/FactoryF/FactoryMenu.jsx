@@ -26,7 +26,8 @@ function FactoryMenu() {
 
   const approveFactoryForFarmer = async (farmerId, factoryId) => {
     try {
-      const response = axiosInstance.post("/farmers/approve-factory", {
+      console.log(farmerId, factoryId);
+      const response = await axiosInstance.post("/farmers/approve-factory", {
         farmerId,
         factoryId,
       });
@@ -50,6 +51,7 @@ function FactoryMenu() {
             <p className="text-gray-600"><strong>Role:</strong> {farmer.role}</p>
             <p className="text-gray-600"><strong>Role:</strong> {farmer._id}</p>
             <p className="text-gray-600"><strong>Role:</strong> {factoryData.id}</p>
+            <p>{farmer._id}</p>
             <button 
               onClick={() => approveFactoryForFarmer(farmer._id, factoryId)} 
               className="mt-4 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
