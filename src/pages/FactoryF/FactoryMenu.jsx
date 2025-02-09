@@ -2,10 +2,16 @@ import React, { useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
 import axiosInstance from '../../Helper/axiosInstance';
 import { useSelector } from 'react-redux';
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 
 function FactoryMenu() {
   const [farmers, setFarmers] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  
 
   const factoryData = useSelector((state) => state.auth.data);
   const factoryId = factoryData.id;
@@ -24,6 +30,16 @@ function FactoryMenu() {
     getFarmers();
   }, []);
 
+
+  const approvedfarmers = (e) => {
+    e.preventDefault();
+    // alert(
+    //   `Proposal Sent to ${selectedFactory.name}:\nQuantity: ${formData.quantity}\nDelivery Date: ${formData.deliveryDate}`
+    // );
+    // closeModal();
+    navigate("/approvedFactories");
+  };
+
   const approveFactoryForFarmer = async (farmerId, factoryId) => {
     try {
       console.log(farmerId, factoryId);
@@ -40,6 +56,14 @@ function FactoryMenu() {
 
   return (
     <div className="p-4">
+
+<button
+          type="button"
+                  onClick={approvedfarmers}
+                  className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
+                >
+                  Approved Farmers
+                </button>
       <h1 className="text-2xl font-bold mb-4">Farmer Details</h1>
 
       <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

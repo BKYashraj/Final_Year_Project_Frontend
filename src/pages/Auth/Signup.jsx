@@ -50,6 +50,8 @@ function Signup() {
     existingFactories:"",
     productsRequiringEthanol:"",
     prefferedEthanolType:"",
+    bankAccount: "",
+    ifscCode: "",
   });
 
   function handleUserInput(e) {
@@ -144,6 +146,9 @@ function Signup() {
                   </div>
                 ))}
               </div>
+<input type="text" name="bankAccount" placeholder="Bank Account Number"  id="bankAccount" value={signUpState.bankAccount} onChange={handleUserInput} required className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-yellow-300"
+  />
+              <input type="text" name="ifsc" placeholder="ifsc" required onChange={handleUserInput} className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-yellow-300" />
               <input type="text" name="state" placeholder="State" required onChange={handleUserInput} className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-yellow-300" />
               <input type="text" name="district" placeholder="District" required onChange={handleUserInput} className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-yellow-300" />
               <input type="text" name="totalLandArea" placeholder="Total Land Area in Acres" required onChange={handleUserInput} className="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-yellow-300" />
