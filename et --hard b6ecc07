@@ -1,0 +1,40 @@
+[33mfca9117[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m Merge branch 'main' of https://github.com/BKYashraj/Final_Year_Project_Frontend
+[33mb6ecc07[m Register pages UI
+[33m024c089[m modified:   .env
+[33m5a406a0[m Automate Blockchain part
+[33m2ce426c[m Payment Gateway frontend
+[33m49a792b[m Added changes
+[33m340ac89[m Added Both API and frontend for fatory approved Farmer request and request from factory on farmers page
+[33m9537d18[m farmer data on factory page
+[33m397f8ec[m distributor added
+[33mb754105[m Merge branch 'main' of https://github.com/BKYashraj/Final_Year_Project_Frontend
+[33m14dbafa[m farmer and factory signup added frontend changes
+[33mbc20403[m Merge branch 'main' of https://github.com/BKYashraj/Final_Year_Project_Frontend
+[33m3725f05[m Merge branch 'main' of https://github.com/BKYashraj/Final_Year_Project_Frontend
+[33mf0b6673[m SignUpFrontendCreated
+[33m2815a2e[m error solved
+[33m28485a0[m Added changes
+[33m497fd81[m Added Changes in receipt part
+[33mbcaf484[m added Receipt for Transactions
+[33me334bc7[m Distributir to Retailer
+[33m473af97[m Factory to Distributor Added
+[33m68961d8[m sanika
+[33m440700c[m Priya
+[33m6a21863[m new commit
+[33m86cdaad[m added changes
+[33m6c27783[m added changes
+[33ma327fe4[m Merge branch 'main' of https://github.com/BKYashraj/Final_Year_Project_Frontend
+[33m7597628[m dded changes
+[33mcf72ee1[m Update .env
+[33mbdc6b3b[m Solved error of vercel 404 NOT_FOUND
+[33m66a1686[m Addeed Changes
+[33md33f919[m change
+[33m839a99c[m Factory address change
+[33m0faab93[m Update UI part of factory part
+[33m0db61a2[m Added Blockchain Integration Between farmer and Ethanol Supply chain management
+[33m2fc2acd[m Added for deploye
+[33mfb9fa21[m Added change
+[33mc72d547[m Added Registartion part with react redux
+[33m14a5af2[m Basic UI and Login And Logout UI Ready
+[33mdebee67[m remove main folder
+[33m483e09b[m Initial Setup and Tailwind Integrated
