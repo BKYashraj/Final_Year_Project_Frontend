@@ -7,6 +7,9 @@ import Factory from "./pages/Factory";
 import Distributers from "./pages/Distributers";
 import FactoryMenu from "./pages/FactoryF/FactoryMenu";
 import ApprovedFarmer from "./pages/FactoryF/ApprovedFarmer";
+import About from "./pages/About";
+import Features from "./pages/Features";
+import Contact from "./pages/Contact";
 
 export default function App() {
   return (
@@ -20,7 +23,11 @@ export default function App() {
           <Route path="/factory" element={<FactoryMenu />} />
           <Route path="/distributer" element={<Distributers />} />
           <Route path="/approvedFactories" element={<ApprovedFarmer />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/features" element={<Features />} />
+          <Route path="/contact" element={<Contact />} />
       </Routes>
     </>
   )
 }
+
