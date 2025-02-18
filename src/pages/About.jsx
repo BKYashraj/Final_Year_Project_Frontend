@@ -1,11 +1,11 @@
 import React from "react";
 import ProjectIdea from "../assets/Home Page Images/blockchain.png";
-
+import Nav from "./Nav";
 
 const About = () => {
     return (
-        
-        <section id="about" className="bg-green-100 py-12 text-gray-800">
+        <section id="about">
+            <Nav />
                 <div className="container mx-auto px-6">
                 <h2 className="text-2xl font-bold text-center mb-6">Projet Idea</h2>
                 <div className="flex justify-center items-center p-6">

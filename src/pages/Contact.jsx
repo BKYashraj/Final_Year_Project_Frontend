@@ -1,8 +1,9 @@
 import React from "react";
-
+import Nav from "./Nav";
 const Contact = () => {
     return (
-        <section id="contact" className="py-12 bg-white text-gray-800">
+        <section id="contact">
+          <Nav />
         <div className="container mx-auto px-6">
           <h2 className="text-xl font-bold text-center mb-6">Get in Touch</h2>
           <form className="max-w-2xl mx-auto space-y-3">

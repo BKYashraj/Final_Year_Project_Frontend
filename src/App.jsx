@@ -10,6 +10,7 @@ import ApprovedFarmer from "./pages/FactoryF/ApprovedFarmer";
 import About from "./pages/About";
 import Features from "./pages/Features";
 import Contact from "./pages/Contact";
+// import Home from "./pages/Home";
 
 export default function App() {
   return (
@@ -26,6 +27,7 @@ export default function App() {
           <Route path="/about" element={<About />} />
           <Route path="/features" element={<Features />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/home" element={<Home />} />
       </Routes>
     </>
   )

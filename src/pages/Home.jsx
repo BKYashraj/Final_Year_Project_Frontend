@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Heroimage from "../assets/Home Page Images/Hero.png";
 import ProjectIdea from "../assets/Home Page Images/blockchain.png";
+import Nav from "./Nav";
+import Footer from "./Footer"
 // import security from "../assets/Home Page Images/security.png";
 // import decentralization from "../assets/Home Page Images/decentralization.png";
 // import transparency from "../assets/Home Page Images/transparency.png";
@@ -22,72 +24,7 @@ const Home = () => {
   return (
     <div className="bg-green-50 min-h-screen">
       {/* Navbar */}
-      <header
-      className={`fixed top-0 w-full transition-all duration-300 ${
-        isSticky
-          ? "bg-green-700 shadow-md py-2"
-          : "bg-green-600 shadow-lg py-3"
-      }`}
-    >
-        <div className="container mx-auto flex justify-between items-center px-6">
-          <h1 className="text-xl font-bold">Ethanol Supply Chain</h1>
-          <nav className="hidden md:flex space-x-4 font-semibold justify-between items-center text-xl">
-          <Link to="/about" className="hover:text-gray-200">
-              About
-            </Link>
-            <Link to="/features" className="hover:text-gray-200">
-              Features
-            </Link>
-            <Link to="/contact" className="hover:text-gray-200">
-              Contact
-            </Link>
-          </nav>
-          <div className="flex items-center space-x-4">
-            <Link to="/auth/signin">
-              <button className="px-4 py-2 text-lg text-white font-bold bg-gradient-to-r from-green-500 to-blue-500 rounded-md shadow-lg hover:from-blue-500 hover:to-green-500 focus:outline-none focus:ring-2 focus:ring-green-300">
-                Login
-              </button>
-            </Link>
-            <Link to="/auth/signup">
-              <button className="px-4 py-2 text-lg text-white font-bold bg-gradient-to-r from-green-500 to-blue-500 rounded-md shadow-lg hover:from-blue-500 hover:to-green-500 focus:outline-none focus:ring-2 focus:ring-green-300">
-                Register
-              </button>
-            </Link>
-          </div>
-          <button className="md:hidden text-white" id="menu-toggle">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              className="h-6 w-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            </svg>
-          </button>
-        </div>
-        {/* <div
-          className="md:hidden bg-green-600 text-white text-lg font-semibold"
-          id="mobile-menu"
-          style={{ display: "none" }}
-        >
-          <Link to="/about" className="hover:text-gray-200">
-              About
-            </Link>
-          <Link to="/features" className="hover:text-gray-200">
-            Features
-          </Link>
-          <Link to="/contact" className="hover:text-gray-200">
-            Features
-          </Link>
-        </div> */}
-      </header>
-
+      <Nav />
       {/* Hero Section */}
       <section className="bg-green-100 text-gray-800">
         <div className="container mx-auto flex flex-col-reverse lg:flex-row items-center px-6 py-12">
@@ -154,9 +91,7 @@ const Home = () => {
       </section>
 
       {/* Footer */}
-      <footer className="bg-green-600 text-white py-3 text-center text-sm">
-        <p>&copy; 2025 Ethanol Supply Chain. All rights reserved.</p>
-      </footer>
+      <Footer></Footer>
     </div>
   );
 };

@@ -3,6 +3,8 @@ import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { login } from "../../Redux/Slices/AuthSlice";
+import Nav from "../Nav.jsx";
+
 function LoginPresentation() {
 
   const navigate = useNavigate();
@@ -75,84 +77,10 @@ function LoginPresentation() {
     }
   }
 
-  const [isSticky, setIsSticky] = useState(false);
-    useEffect(() => {
-      const handleScroll = () => {
-        if (window.scrollY > 50) {
-          setIsSticky(true);
-        } else {
-          setIsSticky(false);
-        }
-      };
   
-      window.addEventListener("scroll", handleScroll);
-      return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
-
   return (
     <>
-    <header className={`fixed top-0 w-full transition-all duration-300 ${isSticky ? "bg-teal-300  py-2" : "bg-teal-300  py-3"}`}>
-
-        <div className="container mx-auto flex justify-between items-center px-6">
-          <h1 className="text-xl font-bold">Ethanol Supply Chain</h1>
-          <nav className="hidden md:flex space-x-4 font-semibold justify-between items-center text-xl">
-          <Link to="/about" className="hover:text-gray-700">
-              About
-            </Link>
-            <Link to="/features" className="hover:text-gray-700">
-              Features
-            </Link>
-            <Link to="/contact" className="hover:text-gray-700">
-              Contact
-            </Link>
-          </nav>
-          <div className="flex items-center space-x-4">
-  <Link to="/auth/signin">
-  <button className="px-4 py-2 text-black font-bold bg-yellow-500 rounded-md shadow-lg hover:bg-yellow-600">
-  Login
-</button>
-<button className="px-4 py-2 text-black font-bold bg-orange-500 rounded-md shadow-lg hover:bg-orange-600">
-  Register
-</button>
-
-  </Link>
-</div>
-
-
-
-          <button className="md:hidden text-white" id="menu-toggle">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              className="h-6 w-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            </svg>
-          </button>
-        </div>
-        <div
-          className="md:hidden bg-green-600 text-white text-lg font-semibold"
-          id="mobile-menu"
-          style={{ display: "none" }}
-        >
-          <a href="#about" className="block px-6 py-2 hover:text-gray-200">
-            About
-          </a>
-          <a href="#features" className="block px-6 py-2 hover:text-gray-200">
-            Features
-          </a>
-          <a href="#contact" className="block px-6 py-2 hover:text-gray-200">
-            Contact
-          </a>
-        </div>
-      </header>
+      <Nav />
       <section className="text-gray-600 body-font">
         <div className="flex flex-wrap items-center h-screen px-10 py-6 mx-auto">
           <div className="hidden p-0 lg:w-3/5 md:w-1/2 md:pr-16 lg:pr-0 md:block">
@@ -293,15 +221,15 @@ function LoginPresentation() {
             </svg>
           </div>
 
-          <form className="flex flex-col w-full p-8 mt-10 bg-teal-300 rounded-lg lg:w-2/6 md:w-1/2 md:ml-auto md:mt-0">
-            <h2 className="mb-5 text-lg font-medium text-gray-900 title-font">
+          <form className="flex flex-col w-full p-8 mt-10 bg-teal-200 rounded-lg lg:w-2/6 md:w-1/2 md:ml-auto md:mt-0">
+            <h2 className="mb-5 text-lg font-bold text-gray-900 title-font">
               Login
             </h2>
 
             <div className="relative mb-4">
               <label
                 htmlFor="email"
-                className="text-sm leading-7 text-gray-600"
+                className="text-sm leading-7 text-gray-900"
               >
                 Email <span className="text-red-500">*</span>
               </label>
@@ -319,7 +247,7 @@ function LoginPresentation() {
             <div className="relative mb-4">
               <label
                 htmlFor="password"
-                className="text-sm leading-7 text-gray-600"
+                className="text-sm leading-7 text-gray-900"
               >
                 Password <span className="text-red-500">*</span>
               </label>
@@ -337,7 +265,7 @@ function LoginPresentation() {
             <div className="relative mb-4">
               <label
                 htmlFor="role"
-                className="text-sm leading-7 text-gray-600"
+                className="text-sm leading-7 text-gray-900"
               >
                 Role <span className="text-red-500">*</span>
               </label>
@@ -361,15 +289,14 @@ function LoginPresentation() {
             <button
               type="submit"
               onClick={handleFormSubmit}
-              className="w-full px-8 py-2 text-lg text-white bg-yellow-500 border-0 rounded focus:outline-none hover:bg-yellow-600"
+              className="w-full px-8 py-2 text-lg text-white bg-orange-500 border-0 rounded focus:outline-none hover:bg-yellow-700"
             >
-              Sign In
+              Login
             </button>
 
-            <p className="mt-3 text-xs text-gray-500">
-              Donot have an account ?
-              <Link to="/auth/signup" className="text-yellow-500">
-                Sign Up
+            <p className="mt-4 text-sm text-gray-800">
+              Don't have an account? <Link to="/auth/signup" className="text-yellow-500">
+                  Register
               </Link>
             </p>
           </form>
