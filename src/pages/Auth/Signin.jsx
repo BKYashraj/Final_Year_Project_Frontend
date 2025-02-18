@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { login } from "../../Redux/Slices/AuthSlice";
 import Nav from "../Nav.jsx";
-
+import Footer from "../Footer.jsx";
 function LoginPresentation() {
 
   const navigate = useNavigate();
@@ -301,6 +301,7 @@ function LoginPresentation() {
             </p>
           </form>
         </div>
+        <Footer />
       </section>
     </>
   );

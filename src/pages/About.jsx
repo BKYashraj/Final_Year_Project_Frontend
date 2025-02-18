@@ -1,7 +1,7 @@
 import React from "react";
 import ProjectIdea from "../assets/Home Page Images/blockchain.png";
 import Nav from "./Nav";
-
+import Footer from "./Footer";
 const About = () => {
     return (
         <section id="about">
@@ -25,6 +25,7 @@ const About = () => {
                     environment alike.
                 </p>
                 </div>
+                <Footer />
         </section>
             
 

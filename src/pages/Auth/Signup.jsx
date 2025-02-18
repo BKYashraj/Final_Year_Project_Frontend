@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { createAccount, distributorCreateAccount, factoryCreateAccount } from "../../Redux/Slices/AuthSlice";
 import { useDispatch } from "react-redux";
 import Nav from "../Nav.jsx";
-
+import Footer from "../Footer.jsx";
 
 function Signup() {
   const navigate = useNavigate();
@@ -114,7 +114,7 @@ function Signup() {
   
 
   return (
-
+    <>
     <section className="flex items-center justify-center min-h-screen bg-gray-100">
       <Nav />
       <div className="hidden p-0 lg:w-3/5 md:w-1/2 md:pr-16 lg:pr-0 md:block">
@@ -492,8 +492,10 @@ function Signup() {
 
         <p className="mt-4 text-sm text-center text-gray-800">Already have an account? <Link to="/auth/signin" className="text-yellow-500">Login</Link></p>
       </div>
-
+      
     </section>
+    <Footer />
+    </>
   );
 }
 

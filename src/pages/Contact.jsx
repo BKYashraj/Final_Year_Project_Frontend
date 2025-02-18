@@ -1,5 +1,6 @@
 import React from "react";
 import Nav from "./Nav";
+import Footer from "./Footer";
 const Contact = () => {
     return (
         <section id="contact">
@@ -30,8 +31,8 @@ const Contact = () => {
             </button>
           </form>
         </div>
+        <Footer />
       </section>
-
     );};
 
 export default Contact;
