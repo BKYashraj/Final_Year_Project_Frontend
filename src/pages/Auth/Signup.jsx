@@ -256,15 +256,15 @@ function Signup() {
           </div>
           
 
-      <div className="w-full max-w-xl  p-8 bg-teal-200 rounded-lg shadow-md">
+      <div className="w-full max-w-xl mt-20 mb-10 p-8 bg-teal-100 rounded-lg shadow-md">
         
       <h2 className="mb-5  text-lg  font-bold text-gray-900 title-font">
               Register
             </h2>
-            
+        
         <form className="space-y-5 " onSubmit={handleFormSubmit}>
-          <div >
-            <label htmlFor="role" className="block mb-2  font-medium text-gray-900">Role</label>
+          <div  >
+            <label htmlFor="role" className="block mb-2  font-medium text-gray-900 ">Role</label>
             <select name="role" value={signUpState.role} onChange={handleUserInput} required className="w-full px-4 py-2 text-gray-700 border rounded-lg focus:ring focus:ring-yellow-600">
               <option value="">Select a role</option>
               <option value="Farmer">Farmer</option>
@@ -275,7 +275,7 @@ function Signup() {
           {signUpState.role === "Farmer" && (
   <>
 
-    <div className="space-y-4" >
+    <div className="space-y-4 mt-20" >
       <label className="block text-sm font-medium text-gray-900">
         Full Name <span className="text-red-500">*</span>
         <input type="text" name="name" placeholder="Full Name" required onChange={handleUserInput} className="w-full mt-1 px-4 py-2 border rounded-lg focus:ring focus:ring-yellow-300" />

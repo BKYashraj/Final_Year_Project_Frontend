@@ -3,11 +3,11 @@ import Nav from "./Nav";
 import Footer from "./Footer";
 const Features = () => {
     return (
-        <section id="features">
+      <div className="flex flex-col min-h-screen">
           <Nav />
-              <div className="container mx-auto px-6">
+              <div className="container mx-auto px-6 mt-10 mb-20 flex-grow">
                 <h2 className="text-3xl font-bold text-center mb-8">
-                  Project Features
+                   Features
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                   {/* Transparency Feature */}
@@ -54,8 +54,8 @@ const Features = () => {
                   </div>
                 </div>
               </div>
-        <Footer />
-</section>
+        <Footer  />
+</div>
     );
   };
   

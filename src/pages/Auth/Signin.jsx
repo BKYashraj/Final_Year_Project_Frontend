@@ -82,7 +82,7 @@ function LoginPresentation() {
     <>
       <Nav />
       <section className="text-gray-600 body-font">
-        <div className="flex flex-wrap items-center h-screen px-10 py-6 mx-auto">
+        <div className="flex flex-wrap items-center h-screen px-10 py-6 mx-auto bg-gray-100">
           <div className="hidden p-0 lg:w-3/5 md:w-1/2 md:pr-16 lg:pr-0 md:block">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -221,7 +221,7 @@ function LoginPresentation() {
             </svg>
           </div>
 
-          <form className="flex flex-col w-full p-8 mt-10 bg-teal-200 rounded-lg lg:w-2/6 md:w-1/2 md:ml-auto md:mt-0">
+          <form className="flex flex-col w-full p-8 mt-10 bg-teal-100 rounded-lg lg:w-2/6 md:w-1/2 md:ml-auto md:mt-0">
             <h2 className="mb-5 text-lg font-bold text-gray-900 title-font">
               Login
             </h2>

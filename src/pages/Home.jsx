@@ -22,7 +22,7 @@ const Home = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
   return (
-    <div className="bg-green-50 min-h-screen">
+    <div className="bg-green-50 min-h-screen mt-20">
       {/* Navbar */}
       <Nav />
       {/* Hero Section */}

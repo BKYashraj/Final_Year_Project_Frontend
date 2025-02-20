@@ -18,7 +18,7 @@ const Nav=()=>{
     }, []);
 
     return(
-        <header className={`fixed top-0 w-full transition-all duration-300 ${isSticky ? "bg-teal-300  py-2" : "bg-teal-300  py-3"}`}>
+        <header className={`fixed top-0 w-full transition-all duration-300 z-50 ${isSticky ? "bg-teal-300  py-2" : "bg-teal-300  py-3"}`}>
 
         <div className="container mx-auto flex justify-between items-center px-6">
           <h1 className="text-xl font-bold">Ethanol Supply Chain</h1>

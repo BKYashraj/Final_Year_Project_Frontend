@@ -3,9 +3,12 @@ import Nav from "./Nav";
 import Footer from "./Footer";
 const Contact = () => {
     return (
-        <section id="contact">
+      
+      <div className="flex flex-col min-h-screen">
+
+          {/* <div></div> */}
           <Nav />
-        <div className="container mx-auto px-6">
+        <div className="container mx-auto px-6 mt-10 mb-20 flex-grow">
           <h2 className="text-xl font-bold text-center mb-6">Get in Touch</h2>
           <form className="max-w-2xl mx-auto space-y-3">
             <input
@@ -31,8 +34,8 @@ const Contact = () => {
             </button>
           </form>
         </div>
-        <Footer />
-      </section>
+        <Footer></Footer>
+      </div>
     );};
 
 export default Contact;
