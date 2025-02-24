@@ -8,7 +8,9 @@ import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import { TypeAnimation } from "react-type-animation";
 import Nav from "./Nav";
 import Footer from "./Footer";
-import background from "../pages/supply-chain-management.jpg"
+import image1 from "../assets/Home Page Images/image1.jpg";
+import image2 from "../assets/Home Page Images/image2.jpg";
+import image3 from "../assets/Home Page Images/image3.jpg";
 
 const Home = () => {
   return (
@@ -16,9 +18,9 @@ const Home = () => {
       <Nav />
       
       {/* Hero Section */}
-      <section className="relative w-full h-[90vh] flex flex-col justify-center items-center text-center px-6"
-      style={{ backgroundImage: `url(${background})`,
-      height: "600px",
+      <section className="relative w-full h-[90vh] flex flex-col justify-center items-center text-center"
+      style={{ 
+      height: "700px",
       width:"100%",
       backgroundSize: "cover",
       backgroundRepeat: "no-repeat",
@@ -26,22 +28,49 @@ const Home = () => {
       backgroundBlendMode: "lighten",
       marginTop: "auto" // Mix image with black
       }}>
-      <div className="h-screen flex flex-col justify-center items-center text-center bg-cover bg-center bg-no-repeat" 
-     >
-        <h1 className="text-5xl font-bold text-[#FFDAB9] mb-4">Optimizing Ethanol Supply Chain with Blockchain</h1>
-        <TypeAnimation
-          sequence={["Secure Transactions ✅", 1500, "Real-time Monitoring 📊", 1500, "Trust & Transparency 🤝", 1500]}
-          wrapper="h2"
-          className="text-2xl text-[#FFFDD0] mb-6"
-
-          repeat={Infinity}
-        />
-        <p className="max-w-2xl text-lg">Empowering farmers and industries through decentralized, transparent, and efficient supply chain solutions.</p>
-        <div className="mt-6 flex space-x-4">
-          <Link to="/" className="bg-teal-300 text-gray-800 px-6 py-3 rounded-md">Explore More</Link>
-          <Link to="/auth/signup" className="bg-teal-300 text-gray-800 px-6 py-3 rounded-md">Join Now</Link>
-        </div>
-      </div>
+        <Swiper
+          modules={[Autoplay, Pagination]}
+          spaceBetween={0}
+          slidesPerView={1}
+          autoplay={{ delay: 3000 }}
+          pagination={{ clickable: true }}
+          className="w-full h-[90vh]"
+        >
+          {[image1, image2, image3].map((img, index) => (
+            <SwiperSlide key={index} className="relative w-full h-[90vh]">
+              <div
+                className="absolute top-0 left-0 w-full h-full bg-cover bg-center"
+                style={{ backgroundImage: `url(${img})` }}
+              />
+              <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex flex-col justify-center items-center">
+                <h1 className="text-5xl font-bold text-[#FFDAB9] mb-4">
+                  Optimizing Ethanol Supply Chain with Blockchain
+                </h1>
+                <TypeAnimation
+                  sequence={[
+                    "Secure Transactions ✅", 1500,
+                    "Real-time Monitoring 📊", 1500,
+                    "Trust & Transparency 🤝", 1500
+                  ]}
+                  wrapper="h2"
+                  className="text-2xl text-[#FFFDD0] mb-6"
+                  repeat={Infinity}
+                />
+                <p className="max-w-2xl text-lg text-white">
+                  Empowering farmers and industries through decentralized, transparent, and efficient supply chain solutions.
+                </p>
+                <div className="mt-6 flex space-x-4">
+                  <Link to="/" className="bg-teal-300 text-gray-800 px-6 py-3 rounded-md">
+                    Explore More
+                  </Link>
+                  <Link to="/auth/signup" className="bg-teal-300 text-gray-800 px-6 py-3 rounded-md">
+                    Join Now
+                  </Link>
+                </div>
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </section>
       
       {/* Key Features */}
