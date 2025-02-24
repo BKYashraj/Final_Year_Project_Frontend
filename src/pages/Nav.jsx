@@ -21,30 +21,30 @@ const Nav=()=>{
         <header className={`fixed top-0 w-full transition-all duration-300 z-50 ${isSticky ? "bg-teal-300  py-2" : "bg-teal-300  py-3"}`}>
 
         <div className="container mx-auto flex justify-between items-center px-6">
-          <h1 className="text-xl font-bold">Ethanol Supply Chain</h1>
+          <h1 className="text-xl font-bold text-[#5A4534]">Ethanol Supply Chain</h1>
           <nav className="hidden md:flex space-x-4 font-semibold justify-between items-center text-xl">
-          <Link to="/home" className="hover:text-gray-700">
+          <Link to="/home" className="hover:text-gray-700 text-[#5A4534]">
               Home
             </Link>
-          <Link to="/about" className="hover:text-gray-700">
+          <Link to="/about" className="hover:text-gray-700 text-[#5A4534]">
               About
             </Link>
-            <Link to="/features" className="hover:text-gray-700">
+            <Link to="/features" className="hover:text-gray-700 text-[#5A4534]">
               Features
             </Link>
-            <Link to="/contact" className="hover:text-gray-700">
+            <Link to="/contact" className="hover:text-gray-700 text-[#5A4534]">
               Contact
             </Link>
           </nav>
           <div className="flex items-center space-x-4">
   
   <Link to="/auth/signin">
-              <button className="px-4 py-2 text-lg text-black font-bold bg-orange-500 rounded-md shadow-lg hover:bg-yellow-700 ">
+              <button className="px-4 py-2 text-lg text-[#3F2E23] font-bold bg-orange-500 rounded-md shadow-lg hover:bg-yellow-700 ">
                 Login
               </button>
             </Link>
             <Link to="/auth/signup">
-            <button className="px-4 py-2 text-lg text-black font-bold bg-orange-500 rounded-md shadow-lg hover:bg-yellow-700 ">
+            <button className="px-4 py-2 text-lg text-[#3F2E23] font-bold bg-orange-500 rounded-md shadow-lg hover:bg-yellow-700 ">
             Register
               </button>
             </Link>
