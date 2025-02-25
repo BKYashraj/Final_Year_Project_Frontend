@@ -96,10 +96,25 @@ export const login = createAsyncThunk("auth/login", async (data) => {
   }
 });
 
+export const logout = () => (dispatch) => {
+  localStorage.removeItem("isLoggedIn");
+  localStorage.removeItem("role");
+  localStorage.removeItem("data");
+
+  dispatch(logoutSuccess());
+  toast.success("Logged out successfully");
+};
+
 const AuthSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
+  reducers: {
+    logoutSuccess: (state) => {
+      state.isLoggedIn = false;
+      state.role = "";
+      state.data = {};
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(login.fulfilled, (state, action) => {
@@ -116,16 +131,8 @@ const AuthSlice = createSlice({
         );
 
       })
-      // .addCase(logout.fulfilled, (state) => {
-      //   // reducer which will execute when the logout thunk is fulfilled
-      //   localStorage.setItem("isLoggedIn", false);
-      //   localStorage.setItem("role", "");
-      //   localStorage.setItem("data", JSON.stringify({}));
-      //   state.isLoggedIn = false;
-      //   state.role = "";
-      //   state.data = {};
-      // });
+     
   },
 });
-
+export const { logoutSuccess } = AuthSlice.actions;
 export default AuthSlice.reducer;

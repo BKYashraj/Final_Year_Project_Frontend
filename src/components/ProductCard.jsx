@@ -77,8 +77,8 @@ export default function ProductCard({ farmer, factory }) {
     }
       
     return (
-        <Card className="mt-6 w-96  text-white">
-                <Button onClick={handlePayment} className="w-full bg-[#1B9CFC]">Pay to Farmer</Button>
+        <Card className="mt-6 w-50  text-white">
+                <Button onClick={handlePayment} className=" bg-[#1B9CFC]">Pay to Farmer</Button>
                 <Toaster/>
         </Card>
     );
