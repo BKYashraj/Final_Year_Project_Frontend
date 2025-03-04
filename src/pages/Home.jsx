@@ -8,7 +8,7 @@ import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import { TypeAnimation } from "react-type-animation";
 import Nav from "./Nav";
 import Footer from "./Footer";
-import image1 from "../assets/Home Page Images/image1.jpg";
+import image1 from "../assets/Home Page Images/farmer.jpeg";
 import image2 from "../assets/Home Page Images/image2.jpg";
 import image3 from "../assets/Home Page Images/image3.jpg";
 
