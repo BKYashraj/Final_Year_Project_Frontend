@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { login } from "../../Redux/Slices/AuthSlice";
-
+import Nav from "../Nav.jsx";
+import Footer from "../Footer.jsx";
 function LoginPresentation() {
 
   const navigate = useNavigate();
@@ -76,10 +77,12 @@ function LoginPresentation() {
     }
   }
 
+  
   return (
     <>
+      <Nav />
       <section className="text-gray-600 body-font">
-        <div className="flex flex-wrap items-center h-screen px-10 py-6 mx-auto">
+        <div className="flex flex-wrap items-center h-screen px-10 py-6 mx-auto bg-gray-100">
           <div className="hidden p-0 lg:w-3/5 md:w-1/2 md:pr-16 lg:pr-0 md:block">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -92,7 +95,7 @@ function LoginPresentation() {
               <path
                 d="M831.09242,704.18737c-11.13833-9.4118-17.90393-24.27967-16.12965-38.75366s12.76358-27.78,27.01831-30.85364,30.50415,5.43465,34.83378,19.3594c2.3828-26.84637,5.12854-54.81757,19.40179-77.67976,12.92407-20.70115,35.3088-35.51364,59.5688-38.16357s49.80265,7.35859,64.93272,26.50671,18.83461,46.98549,8.2379,68.96911c-7.80623,16.19456-22.188,28.24676-37.2566,38.05184a240.45181,240.45181,0,0,1-164.45376,35.97709Z"
                 transform="translate(-165.00003 -189.93073)"
-                fill="#f2f2f2"
+                fill="#008080"
               />
               <path
                 d="M996.72788,546.00953a393.41394,393.41394,0,0,0-54.82622,54.44229,394.561,394.561,0,0,0-61.752,103.194c-1.112,2.72484,3.31272,3.911,4.4123,1.21642A392.34209,392.34209,0,0,1,999.96343,549.24507c2.28437-1.86015-.97-5.08035-3.23555-3.23554Z"
@@ -102,7 +105,7 @@ function LoginPresentation() {
               <path
                 d="M445.06712,701.63014c15.2985-12.92712,24.591-33.34815,22.15408-53.22817s-17.53079-38.15588-37.10966-42.37749-41.89745,7.46449-47.8442,26.59014c-3.27278-36.87349-7.04406-75.29195-26.64837-106.69317-17.75122-28.433-48.49666-48.778-81.81777-52.41768s-68.40395,10.107-89.18511,36.407-25.86934,64.53459-11.31476,94.72909c10.72185,22.24324,30.47528,38.79693,51.17195,52.26422,66.02954,42.9653,147.93912,60.88443,225.8773,49.41454"
                 transform="translate(-165.00003 -189.93073)"
-                fill="#f2f2f2"
+                fill="#20B2AA"
               />
               <path
                 d="M217.56676,484.37281a540.35491,540.35491,0,0,1,75.30383,74.77651A548.0761,548.0761,0,0,1,352.25665,647.04a545.835,545.835,0,0,1,25.43041,53.8463c1.52726,3.74257-4.55,5.37169-6.06031,1.67075a536.35952,536.35952,0,0,0-49.009-92.727A539.73411,539.73411,0,0,0,256.889,528.63168a538.44066,538.44066,0,0,0-43.76626-39.81484c-3.13759-2.55492,1.33232-6.97788,4.444-4.444Z"
@@ -112,12 +115,12 @@ function LoginPresentation() {
               <path
                 d="M789.5,708.93073h-365v-374.5c0-79.67773,64.82227-144.5,144.49976-144.5h76.00049c79.67749,0,144.49975,64.82227,144.49975,144.5Z"
                 transform="translate(-165.00003 -189.93073)"
-                fill="#f2f2f2"
+                fill="#20B2AA"
               />
               <path
                 d="M713.5,708.93073h-289v-374.5a143.38177,143.38177,0,0,1,27.59571-84.94434c.66381-.90478,1.32592-1.79785,2.00878-2.68115a144.46633,144.46633,0,0,1,30.75415-29.85058c.65967-.48,1.322-.95166,1.99415-1.42334a144.15958,144.15958,0,0,1,31.47216-16.459c.66089-.25049,1.33374-.50146,2.00659-.74219a144.01979,144.01979,0,0,1,31.1084-7.33593c.65772-.08985,1.333-.16016,2.0083-.23047a146.28769,146.28769,0,0,1,31.10547,0c.67334.07031,1.34864.14062,2.01416.23144a143.995,143.995,0,0,1,31.10034,7.335c.6731.24073,1.346.4917,2.00879.74268a143.79947,143.79947,0,0,1,31.10645,16.21582c.67163.46143,1.344.93311,2.00635,1.40478a145.987,145.987,0,0,1,18.38354,15.564,144.305,144.305,0,0,1,12.72437,14.55078c.68066.88037,1.34277,1.77344,2.00537,2.67676A143.38227,143.38227,0,0,1,713.5,334.43073Z"
                 transform="translate(-165.00003 -189.93073)"
-                fill="#ccc"
+                fill="#008080"
               />
               <circle cx="524.99994" cy="335.5" r="16" fill="#f9a826" />
               <polygon
@@ -218,15 +221,15 @@ function LoginPresentation() {
             </svg>
           </div>
 
-          <form className="flex flex-col w-full p-8 mt-10 bg-gray-100 rounded-lg lg:w-2/6 md:w-1/2 md:ml-auto md:mt-0" >
-            <h2 className="mb-5 text-lg font-medium text-gray-900 title-font">
+          <form className="flex flex-col w-full p-8 mt-10 bg-teal-100 rounded-lg lg:w-2/6 md:w-1/2 md:ml-auto md:mt-0">
+            <h2 className="mb-5 text-lg font-bold text-gray-900 title-font">
               Login
             </h2>
 
             <div className="relative mb-4">
               <label
                 htmlFor="email"
-                className="text-sm leading-7 text-gray-600"
+                className="text-sm leading-7 text-gray-900"
               >
                 Email <span className="text-red-500">*</span>
               </label>
@@ -244,7 +247,7 @@ function LoginPresentation() {
             <div className="relative mb-4">
               <label
                 htmlFor="password"
-                className="text-sm leading-7 text-gray-600"
+                className="text-sm leading-7 text-gray-900"
               >
                 Password <span className="text-red-500">*</span>
               </label>
@@ -262,7 +265,7 @@ function LoginPresentation() {
             <div className="relative mb-4">
               <label
                 htmlFor="role"
-                className="text-sm leading-7 text-gray-600"
+                className="text-sm leading-7 text-gray-900"
               >
                 Role <span className="text-red-500">*</span>
               </label>
@@ -286,19 +289,19 @@ function LoginPresentation() {
             <button
               type="submit"
               onClick={handleFormSubmit}
-              className="w-full px-8 py-2 text-lg text-white bg-yellow-500 border-0 rounded focus:outline-none hover:bg-yellow-600"
+              className="w-full px-8 py-2 text-lg text-white bg-orange-500 border-0 rounded focus:outline-none hover:bg-yellow-700"
             >
-              Sign In
+              Login
             </button>
 
-            <p className="mt-3 text-xs text-gray-500">
-              Donot have an account ?
-              <Link to="/auth/signup" className="text-yellow-500">
-                Sign Up
+            <p className="mt-4 text-sm text-gray-800">
+              Don't have an account? <Link to="/auth/signup" className="text-yellow-500">
+                  Register
               </Link>
             </p>
           </form>
         </div>
+        <Footer />
       </section>
     </>
   );
