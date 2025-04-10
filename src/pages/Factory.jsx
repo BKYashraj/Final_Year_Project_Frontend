@@ -3,6 +3,7 @@ import abi from "../contractJson/FarmerToFactory.json";
 // import { ethers } from 'ethers';
 import { ethers } from "ethers";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom"
 
 const Factory= () => {
   const [state, setState] = useState({
@@ -10,7 +11,8 @@ const Factory= () => {
     signer: null,
     contract: null,
   });
-
+  
+  const navigate = useNavigate();
   const [account, setAccount] = useState("Not connected");
 
   useEffect(() => {

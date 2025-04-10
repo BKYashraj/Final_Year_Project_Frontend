@@ -8,6 +8,8 @@ import ReceiptGenerator from "./ReceiptGenerator";
 import FactoryAcceptedFarmerMenu from "./FarmerRelated/FactoryAcceptedFarmerMenu";
 import axiosInstance from "../Helper/axiosInstance";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
 
 const FactoryList = () => {
   const [state, setState] = useState({
@@ -16,6 +18,8 @@ const FactoryList = () => {
     contract: null,
     //yashraj
   });
+  const navigate = useNavigate();
+
 
   const [account, setAccount] = useState("Not connected");
   const [transactionHash, setTransactionHash] = useState(null);
@@ -185,6 +189,16 @@ const FactoryList = () => {
     closeModal();
   };
 
+  const Image_detection= (e) => {
+    e.preventDefault();
+    // alert(
+    //   `Proposal Sent to ${selectedFactory.name}:\nQuantity: ${formData.quantity}\nDelivery Date: ${formData.deliveryDate}`
+    // );
+    // closeModal();
+    navigate("/image_detection");
+  };
+
+
   return (
     <div className="min-h-screen bg-gray-100">
       {/* Header */}
@@ -194,6 +208,16 @@ const FactoryList = () => {
         </div>
       </header>
 
+
+      <h2>hiiiii</h2>
+
+      <button
+          type="button"
+                  onClick={Image_detection}
+                  className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
+                >
+                  Disease Predictor
+                </button>∂
       {/* <FactoryAcceptedFarmerMenu /> */}
 
       {/* Factory List */}
