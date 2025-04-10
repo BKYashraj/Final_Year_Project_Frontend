@@ -5,18 +5,20 @@ import { ethers } from "ethers";
 import toast from "react-hot-toast";
 import ReceiptGenerator from "./ReceiptGenerator";
 // import FactoryMenu from "./FactoryF/FactoryMenu";
-import FactoryAcceptedFarmerMenu from "./FarmerRelated/FactoryAcceptedFarmerMenu";
+// import FactoryAcceptedFarmerMenu from "./FarmerRelated/FactoryAcceptedFarmerMenu";
 import axiosInstance from "../Helper/axiosInstance";
-<<<<<<< HEAD
+
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-=======
-import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+
+import { useDispatch } from "react-redux";
+// import { Link } from "react-router-dom";
 import { logout } from "../Redux/Slices/AuthSlice";
 import image1 from "../assets/Home Page Images/profile.jpg";
->>>>>>> d04356f5ec4b4a5a508600807c69b792b9735629
+// d04356f5ec4b4a5a508600807c69b792b9735629
+
+// d04356f5ec4b4a5a508600807c69b792b9735629
 
 const FactoryList = () => {
   const [state, setState] = useState({
@@ -27,7 +29,7 @@ const FactoryList = () => {
   const navigate = useNavigate();
 
 
-  const [account, setAccount] = useState("Not connected");
+  // const [account, setAccount] = useState("Not connected");
   const [transactionHash, setTransactionHash] = useState(null);
   const [showPopup, setShowPopup] = useState(false); // Track visibility of the popup
   const [factories, setFactories] = useState([]);
@@ -197,7 +199,7 @@ const FactoryList = () => {
     closeModal();
   };
 
-<<<<<<< HEAD
+
   const Image_detection= (e) => {
     e.preventDefault();
     // alert(
@@ -207,8 +209,6 @@ const FactoryList = () => {
     navigate("/image_detection");
   };
 
-
-=======
 
 
   const previousOrders = [
@@ -220,8 +220,7 @@ const FactoryList = () => {
 
 
 
-  
->>>>>>> d04356f5ec4b4a5a508600807c69b792b9735629
+
   return (
     <div className="min-h-screen bg-gray-100">
       {/* Header */}
@@ -229,18 +228,14 @@ const FactoryList = () => {
   {/* Logo */}
   <h1 className="text-xl font-bold text-[#5A4534]">Farmers</h1>
 
-<<<<<<< HEAD
-
-      <h2>hiiiii</h2>
-
       <button
           type="button"
                   onClick={Image_detection}
                   className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
                 >
                   Disease Predictor
-                </button>∂
-=======
+                </button>
+
   {/* Profile Dropdown */}
   <div className="relative">
     <img
@@ -290,7 +285,8 @@ const FactoryList = () => {
           ))}
         </div>
       </div>
->>>>>>> d04356f5ec4b4a5a508600807c69b792b9735629
+
+
       {/* <FactoryAcceptedFarmerMenu /> */}
 
       {/* Factory List */}

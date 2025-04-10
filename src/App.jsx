@@ -7,14 +7,11 @@ import Factory from "./pages/Factory";
 import Distributers from "./pages/Distributers";
 import FactoryMenu from "./pages/FactoryF/FactoryMenu";
 import ApprovedFarmer from "./pages/FactoryF/ApprovedFarmer";
-<<<<<<< HEAD
 import ImagePredictor from "./pages/FarmerRelated/ImagePredictor";
-=======
 import About from "./pages/About";
 import Features from "./pages/Features";
 import Contact from "./pages/Contact";
 // import Home from "./pages/Home";
->>>>>>> d04356f5ec4b4a5a508600807c69b792b9735629
 
 export default function App() {
   return (
@@ -28,14 +25,10 @@ export default function App() {
           <Route path="/factory" element={<FactoryMenu />} />
           <Route path="/distributer" element={<Distributers />} />
           <Route path="/approvedFactories" element={<ApprovedFarmer />} />
-<<<<<<< HEAD
+
           <Route path="/image_detection" element={<ImagePredictor />} />
-=======
-          <Route path="/about" element={<About />} />
-          <Route path="/features" element={<Features />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/home" element={<Home />} />
->>>>>>> d04356f5ec4b4a5a508600807c69b792b9735629
+
+
       </Routes>
     </>
   )
