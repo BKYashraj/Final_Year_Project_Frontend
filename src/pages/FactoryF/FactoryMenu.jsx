@@ -13,6 +13,9 @@ import ProductCard from '../../components/ProductCard';
 
 function FactoryMenu() {
   const [farmers, setFarmers] = useState([]);
+  const [Approwedfarmers, setApprowedfarmers] = useState([]);
+
+  
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
@@ -58,13 +61,33 @@ function FactoryMenu() {
 
 
 
-
+// Farmer Request 
 
   const getFarmers = async () => {
     setLoading(true);
     try {
       const response = await axiosInstance.get("/farmers/getFarmer");
       setFarmers(response.data.farmers);
+      console.log("9999999999",response)
+    } catch (error) {
+      console.error("Error fetching farmers:", error);
+    }
+    setLoading(false);
+  };
+
+  
+
+
+// Approved Farmer Request 
+
+  const getApprovedFarmers = async () => {
+    setLoading(true);
+    try {
+      console.log("aaaaaaaaFcatory id",factoryId);
+      const response2 = await axiosInstance.get(`/farmers/approvedFarmer/${factoryId}`);
+      
+      console.log("9999999999aaaaaaaaa",response2)
+      setApprowedfarmers(response2.data.farmers2);
     } catch (error) {
       console.error("Error fetching farmers:", error);
     }
@@ -73,6 +96,7 @@ function FactoryMenu() {
 
   useEffect(() => {
     getFarmers();
+    getApprovedFarmers();
   }, []);
 
 
@@ -210,7 +234,7 @@ function FactoryMenu() {
                  <h1 className="text-2xl font-bold mb-4">Approved Farmer Details</h1>
         
                 <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {farmers.map((farmer) => (
+                {Approwedfarmers.map((farmer) => (
                     <div key={farmer._id} className="border border-gray-300 rounded-lg shadow-md p-4 bg-white">
                     <h2 className="text-xl font-semibold text-gray-800">{farmer.firstName} {farmer.lastName}</h2>
                     <p className="text-gray-600 mt-2"><strong>Mobile:</strong> {farmer.mobileNumber}</p>

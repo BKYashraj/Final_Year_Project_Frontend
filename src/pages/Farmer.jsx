@@ -133,8 +133,6 @@ const FactoryList = () => {
 
 
 
-
-
   const farmerData = useSelector((state) => state.auth.data);
   const farmerId = farmerData.id;
   // const farmerName = farmerData.name;
@@ -145,6 +143,19 @@ const FactoryList = () => {
       const response = await axiosInstance.get(`/farmers/${farmerId}`);
       console.log(response);
       setFactories(response.data.data.factories);
+    } catch (error) {
+      console.error("Error fetching approved factories:", error);
+      setError("Failed to load approved factories.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+   const changeLabelApprovedFactories = async () => {
+    setLoading(true);
+    try {
+      await axiosInstance.put(`/farmers/farmerapprovefactory/${farmerId}`);
+      
     } catch (error) {
       console.error("Error fetching approved factories:", error);
       setError("Failed to load approved factories.");
@@ -307,7 +318,7 @@ const FactoryList = () => {
             <p className="text-[#8B6F56]"><strong>Subsidy or Incentive Schemes:</strong> {factory.subsidyOrIncentiveSchemes}</p>
             <button
               className="bg-teal-500 text-white px-4 py-2 rounded hover:bg-teal-600"
-              onClick={() => openModal(factory)}
+              onClick={changeLabelApprovedFactories}
             >
               Send Proposal
             </button>
