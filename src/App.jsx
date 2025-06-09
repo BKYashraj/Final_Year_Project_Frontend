@@ -11,6 +11,8 @@ import ImagePredictor from "./pages/FarmerRelated/ImagePredictor";
 import About from "./pages/About";
 import Features from "./pages/Features";
 import Contact from "./pages/Contact";
+import FactoryLots from "./pages/FactoryF/FactoryLots";
+import AddLotForm from "./pages/FactoryF/AddLotForm";
 // import Home from "./pages/Home";
 
 export default function App() {
@@ -27,7 +29,8 @@ export default function App() {
           <Route path="/approvedFactories" element={<ApprovedFarmer />} />
 
           <Route path="/image_detection" element={<ImagePredictor />} />
-
+          <Route path="/factory/lots" element={<FactoryLots />} />
+           <Route path="/factory/add-lot" element={<AddLotForm />} />
 
       </Routes>
     </>

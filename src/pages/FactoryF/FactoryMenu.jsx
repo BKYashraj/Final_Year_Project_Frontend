@@ -9,6 +9,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../../Redux/Slices/AuthSlice";
 import ProductCard from '../../components/ProductCard';
+import AddLotForm from './AddLotForm';
+import FactoryLots from './FactoryLots';
 
 
 function FactoryMenu() {
@@ -141,6 +143,9 @@ function FactoryMenu() {
 
   return (
     <div>
+
+      
+
       <header className="bg-teal-300 text-white py-3 px-6 flex justify-between items-center shadow-md sticky top-0 z-50">
         {/* Logo */}
         <h1 className="text-xl font-bold text-[#5A4534]">Factory</h1>
@@ -153,7 +158,9 @@ function FactoryMenu() {
             className="w-10 h-10 rounded-full cursor-pointer"
             onClick={() => setDropdownOpen(!dropdownOpen)}
           />
-      
+
+
+
           {dropdownOpen && (
             <div className="absolute right-0 mt-2 w-40 bg-white text-black rounded-md shadow-lg p-2">
               <p className="text-center font-semibold">{"Factory"}</p>
@@ -181,6 +188,18 @@ function FactoryMenu() {
       <h1 className="text-2xl font-bold mb-4">Farmer Requests </h1>
 
       {/*farmer request*/ }
+
+       <h1>Factory Dashboard</h1>
+
+      <button onClick={() => navigate('/factory/lots')}>
+        View Ethanol Lots
+      </button>
+
+     <button
+  onClick={() => navigate('/factory/add-lot', { state: { factoryId } })}
+>
+  Add New Ethanol Lot
+</button>
 
       <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4  p-6">
               {farmers.map((farmer) => (
