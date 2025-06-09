@@ -38,7 +38,7 @@ export default function ProductCard({ farmer, factory }) {
 
       const handlePaymentVerify = async (data) => {
         const options = {
-            key: import.meta.env.RAZORPAY_KEY_ID,
+            key: 'rzp_test_9SWw23mphiAKzU',
             amount: data.amount,
             currency: data.currency,
             name: "Ethanol_Supply_chain",
