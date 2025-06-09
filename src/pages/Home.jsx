@@ -8,63 +8,57 @@ import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import { TypeAnimation } from "react-type-animation";
 import Nav from "./Nav";
 import Footer from "./Footer";
-import image1 from "../assets/Home Page Images/farmer.jpeg";
-import image2 from "../assets/Home Page Images/image2.jpg";
-import image3 from "../assets/Home Page Images/image3.jpg";
+
+const bannerImages = [
+  "https://images.pexels.com/photos/16019822/pexels-photo-16019822/free-photo-of-man-carrying-plants-on-a-back-of-a-bicycle.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
+  "https://plus.unsplash.com/premium_photo-1664299124175-e2c793325bfa?q=80&w=2001&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://plus.unsplash.com/premium_photo-1682144397847-f5c82df5476a?q=80&w=2071&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1556740738-b6a63e27c4df",
+  "https://www.petrolpumpdealerchayan.in/petrol-2023/assets/images/homebanner.jpg"
+];
 
 const Home = () => {
   return (
-    <div className="bg-teal-100 text-gray-900 mt-10">
+    <div className="bg-[#e6fff5] text-gray-900" id="top">
       <Nav />
-      
+
       {/* Hero Section */}
-      <section className="relative w-full h-[90vh] flex flex-col justify-center items-center text-center"
-      style={{ 
-      height: "700px",
-      width:"100%",
-      backgroundSize: "cover",
-      backgroundRepeat: "no-repeat",
-      backgroundColor: "hsla(180, 3.50%, 45.10%, 0.50)", // Black overlay
-      backgroundBlendMode: "lighten",
-      marginTop: "auto" // Mix image with black
-      }}>
+      <section className="relative w-full h-screen flex flex-col justify-center items-center text-center">
         <Swiper
           modules={[Autoplay, Pagination]}
           spaceBetween={0}
           slidesPerView={1}
-          autoplay={{ delay: 3000 }}
+          autoplay={{ delay: 3500 }}
           pagination={{ clickable: true }}
-          className="w-full h-[90vh]"
+          className="w-full h-screen"
         >
-          {[image1, image2, image3].map((img, index) => (
-            <SwiperSlide key={index} className="relative w-full h-[90vh]">
+          {bannerImages.map((img, index) => (
+            <SwiperSlide key={index} className="relative w-full h-screen">
               <div
                 className="absolute top-0 left-0 w-full h-full bg-cover bg-center"
                 style={{ backgroundImage: `url(${img})` }}
               />
-              <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 flex flex-col justify-center items-center">
-                <h1 className="text-5xl font-bold text-[#FFDAB9] mb-4">
-                  Optimizing Ethanol Supply Chain with Blockchain
+              <div className="absolute top-0 left-0 w-full h-full bg-green-900 bg-opacity-50 flex flex-col justify-center items-center px-4">
+                <h1 className="text-5xl font-extrabold text-white mb-4">
+                  Ethanol Supply Chain Reinvented
                 </h1>
                 <TypeAnimation
                   sequence={[
-                    "Secure Transactions ✅", 1500,
-                    "Real-time Monitoring 📊", 1500,
-                    "Trust & Transparency 🤝", 1500
+                    "Empowering Sustainability 🌱", 1500,
+                    "Securing Transactions 🔐", 1500,
+                    "Driving Trust & Transparency 🤝", 1500
                   ]}
                   wrapper="h2"
-                  className="text-2xl text-[#FFFDD0] mb-6"
+                  className="text-2xl text-green-100 mb-6"
                   repeat={Infinity}
                 />
-                <p className="max-w-2xl text-lg text-white">
-                  Empowering farmers and industries through decentralized, transparent, and efficient supply chain solutions.
+                <p className="max-w-3xl text-lg text-white">
+                  Integrating blockchain technology for greener, smarter, and more secure ethanol logistics from field to fuel.
                 </p>
                 <div className="mt-6 flex space-x-4">
-                  <Link to="/" className="bg-teal-300 text-gray-800 px-6 py-3 rounded-md">
-                    Explore More
-                  </Link>
-                  <Link to="/auth/signup" className="bg-teal-300 text-gray-800 px-6 py-3 rounded-md">
-                    Join Now
+                  {/* Removed Learn More button as per your request */}
+                  <Link to="/auth/signup" className="bg-white text-green-800 px-6 py-3 rounded-full font-semibold shadow-md hover:bg-gray-100">
+                    Get Started
                   </Link>
                 </div>
               </div>
@@ -72,99 +66,154 @@ const Home = () => {
           ))}
         </Swiper>
       </section>
-      
-      {/* Key Features */}
-      {/* Key Features */}
-<section className="py-16  bg-teal-100 text-center overflow-hidden">
-<div className="container mx-auto px-4">
-  <h2 className="text-3xl font-bold mb-6 text-[#5A4534]">Why Choose Our Solution?</h2>
-  <Swiper
-  modules={[Pagination, Autoplay]}
-  spaceBetween={20}
-  slidesPerView={1}
-  pagination={{ clickable: true }} // Simple pagination
-  autoplay={{ delay: 3000 }}
-  breakpoints={{
-    640: { slidesPerView: 1 },
-    768: { slidesPerView: 2 },
-    1024: { slidesPerView: 3 },
-  }}
-  className="w-full max-w-6xl mx-auto pb-10" // Padding bottom for pagination dots
->
-  {[
-    { title: "🔒 Secure Transactions", desc: "Tamper-proof blockchain records for every ethanol transaction." },
-    { title: "📊 Real-Time Tracking", desc: "Monitor ethanol movement from farm to industry instantly." },
-    { title: "🌿 Sustainable & Transparent", desc: "Enhancing trust and reducing inefficiencies." },
-    { title: "⚡ Automated Smart Contracts", desc: "Ensures seamless and fraud-proof transactions." },
-    { title: "📉 Cost Efficiency", desc: "Eliminating middlemen to maximize profits for farmers and industries." }
-  ].map((feature, index) => (
-    <SwiperSlide key={index} className="flex items-center justify-center text-[#5A4534]">
-      <motion.div className="p-6 bg-teal-50 rounded-lg shadow-md h-[200px] flex flex-col justify-center w-full"
-        whileHover={{ scale: 1.05 }}>
-        <h3 className="text-xl font-semibold mb-2 flex items-center justify-center gap-2">
-          {feature.title}
-        </h3>
-        <p className="text-gray-600 text-center">{feature.desc}</p>
-      </motion.div>
-    </SwiperSlide>
-  ))}
-</Swiper>
 
-</div>
+      {/* Features Section */}
+      <section id="features" className="py-20 bg-[#e6fff5] text-center">
+        <div className="container mx-auto px-6">
+          <h2 className="text-4xl font-bold mb-12 text-green-800">Key Features</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[
+              {
+                title: "Secure Multi-Role Login",
+                desc: "Dedicated registration and login for Farmers, Factories, and Distributors with secure authentication."
+              },
+              {
+                title: "Role-Based Dashboards",
+                desc: "Customized dashboards for stakeholders to view contracts, requests, and transactions."
+              },
+              {
+                title: "Automated Smart Contracts",
+                desc: "Smart contracts trigger actions when conditions are met, ensuring efficiency and reducing errors."
+              },
+              {
+                title: "AI-Based Disease Detection",
+                desc: "Farmers can upload crop images to detect diseases and receive preventive suggestions."
+              },
+              {
+                title: "Blockchain Data Integrity",
+                desc: "On-chain records ensure trust and transparency across the supply chain ecosystem."
+              },
+              {
+                title: "Robust Security",
+                desc: "Features strong encryption, authentication, and backup systems to protect sensitive data."
+              }
+            ].map((feature, index) => (
+              <motion.div
+                key={index}
+                className="p-6 bg-white rounded-2xl shadow-md text-left"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                whileHover={{ scale: 1.03 }}
+                transition={{ duration: 0.5, delay: index * 0.15 }}
+              >
+                <h3 className="text-xl font-semibold text-green-900 mb-2">{feature.title}</h3>
+                <p className="text-gray-700">{feature.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
 
-</section>
-<style>
-{`
-  .swiper-pagination {
-    position: relative !important;
-    margin-top: 16px !important;
-  }
-  .swiper-wrapper {
-    display: flex !important;
-  }
-`}
-</style>
-
-      
-      {/* How It Works */}
-      <section className="py-16 bg-white text-center">
-        <h2 className="text-3xl font-bold mb-6 text-[#5A4534]">How It Works</h2>
+      {/* How It Works Section */}
+      <section id="working" className="py-20 bg-white text-center">
+        <h2 className="text-4xl font-bold mb-10 text-green-900">How It Works</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 px-6">
           {[
-            "Farmers record ethanol production on blockchain.",
-            "Smart contracts enable automated, secure transactions.",
-            "Industries receive verified ethanol supply seamlessly."
+            {
+              title: "1. Decentralized Architecture",
+              desc: "Stakeholders register using verifiable credentials on a secure blockchain to ensure transparency and prevent fraud."
+            },
+            {
+              title: "2. Smart Registration",
+              desc: "Farmers, factories, and distributors submit essential business and operational data stored in a decentralized system."
+            },
+            {
+              title: "3. Automated Smart Contracts",
+              desc: "Smart contracts handle agreements, enforce delivery terms, pricing, and automate validations without manual intervention."
+            },
+            {
+              title: "4. Blockchain Payments",
+              desc: "Instant and secure payments are processed via an integrated blockchain gateway, ensuring traceable and trustless transactions."
+            },
+            {
+              title: "5. Hybrid Data Storage",
+              desc: "Off-chain data is stored in MongoDB, while Ethereum and IPFS maintain tamper-proof contract metadata and digital records."
+            },
+            {
+              title: "6. End-to-End Workflow",
+              desc: "From registration to delivery and payment, the system ensures seamless traceability and optimizes operational efficiency."
+            }
           ].map((step, index) => (
-            <motion.div key={index} className="p-6 bg-teal-100 rounded-lg" whileHover={{ scale: 1.05 }}>
-              <h3 className="text-xl font-semibold mb-2 text-[#5A4534]">Step {index + 1}</h3>
-              <p className="text-gray-700">{step}</p>
+            <motion.div
+              key={index}
+              className="p-6 bg-[#e6fff5] rounded-lg shadow-md"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.5, delay: index * 0.15 }}
+            >
+              <h3 className="text-xl font-bold text-green-800 mb-2">{step.title}</h3>
+              <p className="text-gray-700">{step.desc}</p>
             </motion.div>
           ))}
         </div>
       </section>
-      
-      {/* Testimonials & Impact */}
-      <section className="py-16 bg-teal-100 text-center">
-        <h2 className="text-3xl font-bold mb-6 text-[#5A4534]">Success Stories</h2>
-        <Swiper modules={[Navigation, Pagination, Autoplay]} autoplay={{ delay: 3000 }} pagination={{ clickable: true }} className="w-full max-w-3xl mx-auto">
-          {["Using blockchain, we have improved efficiency by 40%!", "Transparency has eliminated fraud in ethanol supply.", "Farmers now receive fair pricing instantly."].map((testimonial, index) => (
-            <SwiperSlide key={index} className="p-6 bg-teal-50 rounded-lg shadow-md">
-              <p className="text-gray-700">“{testimonial}”</p>
-            </SwiperSlide>
+
+      {/* Technologies Section */}
+      <section id="technologies" className="py-20 bg-white text-center">
+        <h2 className="text-4xl font-bold mb-10 text-green-900">Technologies</h2>
+        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 px-6 text-left">
+          {[
+            {
+              title: "Frontend",
+              descs: [
+                "<strong>React.js</strong> for dynamic stakeholder interfaces.",
+                "Responsive, role-based dashboards.",
+                "User-friendly navigation for all devices."
+              ],
+              bgColor: "#e6fff5"
+            },
+            {
+              title: "Backend",
+              descs: [
+                "<strong>Node.js + Express</strong> for APIs and user management.",
+                "<strong>MongoDB</strong> for storing contracts and transactions.",
+                "Handles authentication and real-time data flow."
+              ],
+              bgColor: "#f0fff4"
+            },
+            {
+              title: "AI & Blockchain",
+              descs: [
+                "AI model for crop disease detection from images.",
+                "<strong>Blockchain</strong> to log contracts and ensure transparency.",
+                "Smart contracts for auto-verifiable transactions."
+              ],
+              bgColor: "#e6fff5"
+            }
+          ].map(({ title, descs, bgColor }, index) => (
+            <motion.div
+              key={index}
+              className="p-6 rounded-xl shadow-md"
+              style={{ backgroundColor: bgColor }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              whileHover={{ scale: 1.03 }}
+              transition={{ duration: 0.5, delay: index * 0.15 }}
+            >
+              <h3 className="text-2xl font-semibold mb-3 text-green-800">{title}</h3>
+              <ul className="list-disc list-inside text-gray-700 space-y-2" dangerouslySetInnerHTML={{ __html: descs.map(d => `<li>${d}</li>`).join("") }} />
+            </motion.div>
           ))}
-        </Swiper>
+        </div>
       </section>
-      
-      {/* Call-to-Action */}
-      <section className="bg-teal-300 py-12 text-[#5A4534] text-center">
-        <h2 className="text-3xl font-bold mb-4">Join the Blockchain Revolution in Ethanol Supply</h2>
-        <p className="text-lg mb-6">Start your journey today and experience a decentralized, transparent ethanol ecosystem.</p>
-        <Link to="/auth/signup" className="bg-white text-[#5A4534] px-6 py-3 rounded-md hover:bg-gray-200">Get Started Now</Link>
-      </section>
-      
+
       <Footer />
     </div>
   );
 };
-{/* <h1 class="text-5xl font-bold text-[#FFDAB9] mb-4">Optimizing Ethanol Supply Chain with Blockchain</h1> */}
+
 export default Home;
