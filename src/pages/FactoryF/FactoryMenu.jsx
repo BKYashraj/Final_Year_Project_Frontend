@@ -141,30 +141,22 @@ function FactoryMenu() {
   ];
 
   return (
-    <div>
-
-      
-
-      <header className="bg-teal-300 text-white py-3 px-6 flex justify-between items-center shadow-md sticky top-0 z-50">
-        {/* Logo */}
-        <h1 className="text-xl font-bold text-[#5A4534]">Factory</h1>
-      
-        {/* Profile Dropdown */}
+    <div className="min-h-screen bg-gray-50 text-gray-800">
+      {/* Header */}
+      <header className="bg-green-700 text-white py-4 px-6 flex justify-between items-center shadow-md sticky top-0 z-50">
+        <h1 className="text-2xl font-bold">Factory Dashboard</h1>
         <div className="relative">
           <img
-            src={image1} // Default profile pic
+            src={image1}
             alt="Profile"
             className="w-10 h-10 rounded-full cursor-pointer"
             onClick={() => setDropdownOpen(!dropdownOpen)}
           />
-
-
-
           {dropdownOpen && (
             <div className="absolute right-0 mt-2 w-40 bg-white text-black rounded-md shadow-lg p-2">
-              <p className="text-center font-semibold">{"Factory"}</p>
+              <p className="text-center font-semibold">Factory</p>
               <button
-                className="w-full bg-red-600 text-white mt-2 py-1 rounded-md hover:bg-red-700 transition"
+                className="w-full bg-red-600 text-white mt-2 py-1 rounded hover:bg-red-700"
                 onClick={handleLogout}
               >
                 Logout
@@ -173,114 +165,75 @@ function FactoryMenu() {
           )}
         </div>
       </header>
-{/* <button
-          type="button"
-                  onClick={approvedfarmers}
-                  className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
-                >
-                  Approved Farmers
-                </button> */}
-      
 
-
-
-      <h1 className="text-2xl font-bold mb-4">Farmer Requests </h1>
-
-      {/*farmer request*/ }
-
-       <h1>Factory Dashboard</h1>
-
-      <button onClick={() => navigate('/factory/lots')}>
-        View Ethanol Lots
-      </button>
-
-     <button
-  onClick={() => navigate('/factory/add-lot', { state: { factoryId } })}
->
-  Add New Ethanol Lot
-</button>
-
-      <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4  p-6">
-              {farmers.map((farmer) => (
-                <div key={farmer._id} className="border border-gray-300 rounded-lg shadow-md p-4 bg-white">
-                  <h2 className="text-xl font-semibold text-gray-800">{farmer.firstName} {farmer.lastName}</h2>
-                  <p className="text-gray-600 mt-2"><strong>Mobile:</strong> {farmer.mobileNumber}</p>
-                  <p className="text-gray-600"><strong>Email:</strong> {farmer.email}</p>
-                  <p className="text-gray-600"><strong>Role:</strong> {farmer.role}</p>
-                  <p className="text-gray-600"><strong>Role:</strong> {farmer._id}</p>
-                  <p className="text-gray-600"><strong>Role:</strong> {factoryData.id}</p>
-                  <p>{farmer._id}</p>
-                  <button 
-                    onClick={() => approveFactoryForFarmer(farmer._id, factoryId)} 
-                    className="mt-4 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
-                  >
-                    Accept Request
-                  </button>
-                </div>
-              ))}
-            </div>
-
-      {/*div containing both */}
-      <div className="flex h-screen bg-gray-100 p-4 space-x-4">
-        {/*previous orders*/ }
-        <div className="w-1/4 bg-white shadow-lg p-4 rounded-lg">
-          <h2 className="text-lg font-semibold mb-4">Previous Orders</h2>
-          <div>
-            {previousOrders.map((order) => (
-              <div
-                key={order.id}
-                className="border-b p-3 text-sm flex flex-col"
+      {/* Farmer Requests */}
+      <section className="px-6 py-4">
+        <h2 className="text-xl font-semibold mb-4">Farmer Requests</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {farmers.map((farmer) => (
+            <div key={farmer._id} className="bg-white p-4 rounded shadow">
+              <h3 className="text-lg font-bold">{farmer.firstName} {farmer.lastName}</h3>
+              <p>Mobile: {farmer.mobileNumber}</p>
+              <p>Email: {farmer.email}</p>
+              <p>Role: {farmer.role}</p>
+              <button
+                className="mt-2 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+                onClick={() => approveFactoryForFarmer(farmer._id, factoryId)}
               >
-                <span className="font-bold">{order.id}</span>
-                <span>{order.date}</span>
-                <span
-                  className={
-                    order.status === "Completed"
-                      ? "text-green-600"
-                      : "text-yellow-600"
-                  }
-                >
-                  {order.status}
-                </span>
+                Accept Request
+              </button>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Action Buttons */}
+      <div className="flex gap-4 px-6 mt-4">
+        <button
+          onClick={() => navigate('/factory/lots')}
+          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+        >
+          View Ethanol Lots
+        </button>
+        <button
+          onClick={() => navigate('/factory/add-lot', { state: { factoryId } })}
+          className="bg-teal-600 text-white px-4 py-2 rounded hover:bg-teal-700"
+        >
+          Add New Ethanol Lot
+        </button>
+      </div>
+
+      {/* Main Content */}
+      <div className="flex flex-col lg:flex-row gap-6 px-6 py-6">
+        {/* Previous Orders */}
+        <div className="lg:w-1/3 bg-white p-4 rounded shadow">
+          <h2 className="text-lg font-semibold mb-4">Previous Orders</h2>
+          {previousOrders.map((order) => (
+            <div key={order.id} className="border-b py-2">
+              <p className="font-semibold">Order ID: {order.id}</p>
+              <p>Date: {order.date}</p>
+              <p className={order.status === 'Completed' ? 'text-green-600' : 'text-yellow-600'}>
+                {order.status}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        {/* Approved Farmers */}
+        <div className="lg:w-2/3 bg-white p-4 rounded shadow">
+          <h2 className="text-lg font-semibold mb-4">Approved Farmer Details</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {Approwedfarmers.map((farmer) => (
+              <div key={farmer._id} className="bg-gray-50 p-4 rounded shadow">
+                <h3 className="text-lg font-bold">{farmer.firstName} {farmer.lastName}</h3>
+                <p>Mobile: {farmer.mobileNumber}</p>
+                <p>Email: {farmer.email}</p>
+                <p>Role: {farmer.role}</p>
+                <ProductCard farmer={farmer} factory={factoryData} />
               </div>
             ))}
           </div>
         </div>
-
-
-        <div className=" p-4">
-                 <h1 className="text-2xl font-bold mb-4">Approved Farmer Details</h1>
-        
-                <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {Approwedfarmers.map((farmer) => (
-                    <div key={farmer._id} className="border border-gray-300 rounded-lg shadow-md p-4 bg-white">
-                    <h2 className="text-xl font-semibold text-gray-800">{farmer.firstName} {farmer.lastName}</h2>
-                    <p className="text-gray-600 mt-2"><strong>Mobile:</strong> {farmer.mobileNumber}</p>
-                    <p className="text-gray-600"><strong>Email:</strong> {farmer.email}</p>
-                    <p className="text-gray-600"><strong>Role:</strong> {farmer.role}</p>
-                    <p className="text-gray-600"><strong>Role:</strong> {farmer._id}</p>
-                    <p className="text-gray-600"><strong>Role:</strong> {factoryData.id}</p>
-                    <p>{farmer._id}</p>
-                    <ProductCard farmer={farmer} factory={factoryData}/>
-                    {/* <button 
-                        onClick={() => approveFactoryForFarmer(farmer._id, factoryId)} 
-                        className="mt-4 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
-                    >
-                        Accept Request
-                    </button> */}
-                    </div>
-                ))}
-        
-                
-                <>
-               
-        
-                </>
-        </div>
-            </div>
-
-        
-
       </div>
     </div>
   );

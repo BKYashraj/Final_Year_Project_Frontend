@@ -40,7 +40,7 @@ const Home = () => {
               />
               <div className="absolute top-0 left-0 w-full h-full bg-green-900 bg-opacity-50 flex flex-col justify-center items-center px-4">
                 <h1 className="text-5xl font-extrabold text-white mb-4">
-                  Ethanol Supply Chain Reinvented
+                  Ethanol Supply Chain Management
                 </h1>
                 <TypeAnimation
                   sequence={[

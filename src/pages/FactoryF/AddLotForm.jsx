@@ -2,16 +2,21 @@ import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import toast from "react-hot-toast";
 import axiosInstance from "../../Helper/axiosInstance";
+import { useSelector } from "react-redux";
 
 function AddLotForm() {
   const { state } = useLocation();
   const factoryId = state?.factoryId;
+
+  const distributorData = useSelector((state) => state.auth.data);
+  const distributorName = distributorData.name;
 
   const [formData, setFormData] = useState({
     quantity: "",
     pricePerLiter: "",
     productionDate: "",
     location: "",
+    name: distributorName,
   });
 
   const handleInputChange = (e) => {

@@ -37,6 +37,7 @@ function FactoryLots() {
             {lots.map((lot, index) => (
               <div key={index} className="bg-gray-50 p-5 rounded-xl shadow-sm border hover:shadow-lg transition duration-200">
                 <h2 className="text-xl font-semibold text-gray-800 mb-2">Lot #{index + 1}</h2>
+                <p><span className="font-medium">Name of Factory:</span> {lot.name}</p>
                 <p><span className="font-medium">Quantity:</span> {lot.quantity} L</p>
                 <p><span className="font-medium">Price/Liter:</span> ₹{lot.pricePerLiter}</p>
                 <p><span className="font-medium">Production Date:</span> {new Date(lot.productionDate).toLocaleDateString()}</p>

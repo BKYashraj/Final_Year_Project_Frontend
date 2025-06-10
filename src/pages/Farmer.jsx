@@ -233,192 +233,189 @@ const FactoryList = () => {
 
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      {/* Header */}
-      <header className="bg-teal-300 text-white py-3 px-6 flex justify-between items-center shadow-md sticky top-0 z-50">
-  {/* Logo */}
-  <h1 className="text-xl font-bold text-[#5A4534]">Farmers</h1>
+    <div className="min-h-screen bg-gradient-to-br from-green-50 to-green-100 font-sans">
+  {/* Header */}
+  <header className="bg-green-700 text-white py-4 px-6 flex justify-between items-center shadow-lg sticky top-0 z-50">
+    <h1 className="text-2xl font-bold tracking-wide">Farmer Dashboard</h1>
 
+    <div className="flex items-center space-x-4">
       <button
-          type="button"
-                  onClick={Image_detection}
-                  className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
-                >
-                  Disease Predictor
-                </button>
+        onClick={Image_detection}
+        className="bg-yellow-400 text-black font-semibold px-4 py-2 rounded hover:bg-yellow-500 shadow"
+      >
+        Disease Predictor
+      </button>
 
-  {/* Profile Dropdown */}
-  <div className="relative">
-    <img
-      src={image1} // Default profile pic
-      alt="Profile"
-      className="w-10 h-10 rounded-full cursor-pointer"
-      onClick={() => setDropdownOpen(!dropdownOpen)}
-    />
+      {/* <button className="bg-white text-green-700 font-medium px-3 py-1 rounded hover:bg-gray-100">
+        मराठी / हिंदी
+      </button> */}
 
-    {dropdownOpen && (
-      <div className="absolute right-0 mt-2 w-40 bg-white text-black rounded-md shadow-lg p-2">
-        <p className="text-center font-semibold">{farmerData.name || "Farmer"}</p>
-        <button
-          className="w-full bg-red-600 text-white mt-2 py-1 rounded-md hover:bg-red-700 transition"
-          onClick={handleLogout}
-        >
-          Logout
-        </button>
+      {/* Profile Dropdown */}
+      <div className="relative">
+        <img
+          src={image1}
+          alt="Profile"
+          className="w-10 h-10 rounded-full border-2 border-white shadow cursor-pointer"
+          onClick={() => setDropdownOpen(!dropdownOpen)}
+        />
+
+        {dropdownOpen && (
+          <div className="absolute right-0 mt-2 w-48 bg-white text-black rounded-md shadow-lg p-4">
+            <p className="font-semibold text-center mb-2">{farmerData.name || "Farmer"}</p>
+            <button
+              className="w-full bg-red-600 text-white py-1 rounded hover:bg-red-700"
+              onClick={handleLogout}
+            >
+              Logout
+            </button>
+          </div>
+        )}
       </div>
-    )}
-  </div>
-</header>
-        
+    </div>
+  </header>
 
-    {/* Left Sidebar - Previous Orders */}
-    <div className="flex h-screen bg-gray-100 p-4 space-x-4">
-    <div className="w-1/4 bg-white shadow-lg p-4 rounded-lg">
-        <h2 className="text-lg font-semibold mb-4">Previous Orders</h2>
-        <div>
+  {/* Main Layout */}
+  <div className="flex p-4 gap-4">
+    {/* Sidebar */}
+    <aside className="w-1/4 bg-white rounded-xl shadow p-4 space-y-6">
+      <section>
+        <h2 className="text-lg font-semibold mb-3">Previous Orders</h2>
+        <div className="space-y-2 max-h-80 overflow-y-auto pr-2">
           {previousOrders.map((order) => (
             <div
               key={order.id}
-              className="border-b p-3 text-sm flex flex-col"
+              className="border-l-4 pl-2 border-green-600 bg-green-50 p-2 rounded shadow"
             >
-              <span className="font-bold">{order.id}</span>
-              <span>{order.date}</span>
-              <span
-                className={
-                  order.status === "Completed"
-                    ? "text-green-600"
-                    : "text-yellow-600"
-                }
-              >
+              <p className="font-bold">Order #{order.id}</p>
+              <p className="text-sm text-gray-700">{order.date}</p>
+              <span className={
+                order.status === "Completed"
+                  ? "text-green-600"
+                  : "text-yellow-600"
+              }>
                 {order.status}
               </span>
             </div>
           ))}
         </div>
-      </div>
+      </section>
 
+      <section>
+        <h2 className="text-lg font-semibold mb-3">Rewards & Certificates</h2>
+        <button className="bg-indigo-600 text-white px-3 py-2 rounded hover:bg-indigo-700 w-full shadow">
+          Download Certificate
+        </button>
+        <p className="text-sm text-gray-600 mt-1">Pending approval</p>
+      </section>
 
-      {/* <FactoryAcceptedFarmerMenu /> */}
-
-      {/* Factory List */}
-      <main className="container mx-auto px-4 w-1/2 p-6">
-        
-
-        <h1 className="text-xl mb-4 font-bold text-[#5A4534]">
-          Request From Factories
-        </h1>
-        <div className="flex flex-col gap-4">
-        {factories.map((factory) => (
-          <div key={factory._id} className="border border-gray-300 rounded-lg shadow-md p-4 bg-white">
-            <h2 className="text-xl font-semibold text-[#5A4534] uppercase">{factory.factoryName}</h2>
-            <p className="text-[#8B6F56] mt-2"><strong>Address:</strong> {factory.factoryAddress}</p>
-            <p className="text-[#8B6F56]"><strong>Contact Person:</strong> {factory.contactPersonName}</p>
-            <p className="text-[#8B6F56]"><strong>GST Number:</strong> {factory.gstNumber}</p>
-            <p className="text-[#8B6F56]"><strong>Types of Crops Used:</strong> {factory.typesOfCropsUsed.join(', ')}</p>
-            <p className="text-[#8B6F56]"><strong>Subsidy or Incentive Schemes:</strong> {factory.subsidyOrIncentiveSchemes}</p>
-            <button
-              className="bg-teal-500 text-white px-4 py-2 rounded hover:bg-teal-600"
-              onClick={changeLabelApprovedFactories}
-            >
-              Send Proposal
-            </button>
-          </div>
-        ))}
+      <section>
+        <h2 className="text-lg font-semibold mb-3">Transparency Reports</h2>
+        <div className="text-sm text-gray-700">
+          <p>● Order History</p>
+          <p>● Supply Chain Graph</p>
+          <p>● Government Schemes</p>
         </div>
-        
-      </main>
-      </div>
+      </section>
+    </aside>
 
-      {/* Modal Popup */}
-      {showPopup && (
-        <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 z-50">
-          <div className="bg-white p-6 rounded-lg shadow-lg w-128 relative">
-            <button
-              onClick={closePopup}
-              className="absolute top-2 right-2 text-gray-600 text-xl z-60"
+    {/* Main Content */}
+    <main className="flex-1">
+      <section className="bg-white p-6 rounded-xl shadow">
+        <h2 className="text-2xl font-bold text-green-800 mb-6">Requests from Ethanol Factories</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {factories.map((factory) => (
+            <div
+              key={factory._id}
+              className="bg-green-50 border border-green-200 rounded-lg p-4 shadow hover:shadow-md transition"
             >
-              &times;
-            </button>
+              <h3 className="text-xl font-semibold text-green-800 uppercase">
+                {factory.factoryName}
+              </h3>
+              <p className="text-gray-700 mt-2"><strong>Address:</strong> {factory.factoryAddress}</p>
+              <p className="text-gray-700"><strong>Contact:</strong> {factory.contactPersonName}</p>
+              <p className="text-gray-700"><strong>GST:</strong> {factory.gstNumber}</p>
+              <p className="text-gray-700"><strong>Crops:</strong> {factory.typesOfCropsUsed.join(', ')}</p>
+              <p className="text-gray-700"><strong>Incentives:</strong> {factory.subsidyOrIncentiveSchemes}</p>
+              <button
+                className="mt-4 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+                onClick={changeLabelApprovedFactories}
+              >
+                Send Proposal
+              </button>
+            </div>
+          ))}
+        </div>
+      </section>
+    </main>
+  </div>
 
-            <ReceiptGenerator
-              transactionHash={transactionHash}
-              provider={state.provider}
+  {/* Modals */}
+  {showPopup && (
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+      <div className="bg-white p-6 rounded-lg shadow-lg relative w-[32rem]">
+        <button
+          onClick={closePopup}
+          className="absolute top-2 right-2 text-xl text-gray-700"
+        >
+          &times;
+        </button>
+        <ReceiptGenerator transactionHash={transactionHash} provider={state.provider} />
+      </div>
+    </div>
+  )}
+
+  {isModalOpen && selectedFactory && (
+    <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
+      <div className="bg-white p-6 rounded-lg shadow-md max-w-md w-full">
+        <h2 className="text-lg font-bold mb-4">Send Proposal to {selectedFactory.name}</h2>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="block font-medium mb-1">Quantity to Supply (tons)</label>
+            <input
+              type="number"
+              id="quantity"
+              name="quantity"
+              value={formData.quantity}
+              onChange={handleInputChange}
+              className="w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-400"
+              required
             />
           </div>
-        </div>
-      )}
 
-      {/* Render ReceiptGenerator here */}
-      {transactionHash && (
-        <ReceiptGenerator transactionHash={transactionHash} provider={state.provider} />
-      )}
-
-      {/* Modal */}
-      {isModalOpen && selectedFactory && (
-        <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center">
-          <div className="bg-white p-6 rounded shadow max-w-md w-full">
-            <h2 className="text-lg font-bold mb-4">
-              Send Proposal to {selectedFactory.name}
-            </h2>
-            <form onSubmit={handleSubmit}>
-              <div className="mb-4">
-                <label
-                  htmlFor="quantity"
-                  className="block text-gray-700 font-medium mb-2"
-                >
-                  Quantity to Supply (tons)
-                </label>
-                <input
-                  type="number"
-                  id="quantity"
-                  name="quantity"
-                  value={formData.quantity}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-2 border rounded focus:outline-none focus:ring focus:border-blue-500"
-                  placeholder="Enter quantity (e.g., 200)"
-                  required
-                />
-              </div>
-
-              <div className="mb-4">
-                <label
-                  htmlFor="deliveryDate"
-                  className="block text-gray-700 font-medium mb-2"
-                >
-                  Delivery Date
-                </label>
-                <input
-                  type="date"
-                  id="deliveryDate"
-                  name="deliveryDate"
-                  value={formData.deliveryDate}
-                  onChange={handleInputChange}
-                  className="w-full px-4 py-2 border rounded focus:outline-none focus:ring focus:border-blue-500"
-                  required
-                />
-              </div>
-
-              <div className="flex justify-between items-center">
-                <button
-                  type="button"
-                  onClick={closeModal}
-                  className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
-                  onClick={a} // Call the a function when the button is clicked
-                >
-                  Submit Proposal
-                </button>
-              </div>
-            </form>
+          <div>
+            <label className="block font-medium mb-1">Delivery Date</label>
+            <input
+              type="date"
+              id="deliveryDate"
+              name="deliveryDate"
+              value={formData.deliveryDate}
+              onChange={handleInputChange}
+              className="w-full border rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-400"
+              required
+            />
           </div>
-        </div>
-      )}
+
+          <div className="flex justify-between">
+            <button
+              type="button"
+              onClick={closeModal}
+              className="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
+              onClick={a}
+            >
+              Submit Proposal
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
+  )}
+</div>
   );
 };
 
