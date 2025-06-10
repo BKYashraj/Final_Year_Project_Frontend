@@ -33,6 +33,7 @@ const FactoryList = () => {
   const [transactionHash, setTransactionHash] = useState(null);
   const [showPopup, setShowPopup] = useState(false); // Track visibility of the popup
   const [factories, setFactories] = useState([]);
+  const [prevOrders, setprevOrders] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [selectedFactory, setSelectedFactory] = useState(null);
@@ -166,6 +167,7 @@ const FactoryList = () => {
 
   useEffect(() => {
     getApprovedFactories();
+    preveousOrders();
   }, []);
 
   if (loading) {
@@ -222,33 +224,41 @@ const FactoryList = () => {
 
 
 
-  const previousOrders = [
-    { id: "#1234", date: "2025-02-25", status: "Completed" },
-    { id: "#1235", date: "2025-02-24", status: "Pending" },
-    { id: "#1235", date: "2025-02-24", status: "Pending" },
-    { id: "#1235", date: "2025-02-24", status: "Pending" },
-  ];
+  // const previousOrders = [
+  //   { id: "#1234", date: "2025-02-25", status: "Completed" },
+  //   { id: "#1235", date: "2025-02-24", status: "Pending" },
+  //   { id: "#1235", date: "2025-02-24", status: "Pending" },
+  //   { id: "#1235", date: "2025-02-24", status: "Pending" },
+  // ];
 
-
+const preveousOrders = async () => {
+    setLoading(true);
+    try {
+      const response = await axiosInstance.get(`/farmers/PreveousOrders/${farmerId}`);
+      console.log(response);
+      setprevOrders(response.data.transactions);
+    } catch (error) {
+      console.error("Error fetching approved factories:", error);
+      setError("Failed to load approved factories.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-green-100 font-sans">
+   <div className="min-h-screen bg-gradient-to-br from-green-50 to-green-100 font-sans">
   {/* Header */}
   <header className="bg-green-700 text-white py-4 px-6 flex justify-between items-center shadow-lg sticky top-0 z-50">
-    <h1 className="text-2xl font-bold tracking-wide">Farmer Dashboard</h1>
+    <h1 className="text-2xl font-bold tracking-wide">🌿 Farmer Dashboard</h1>
 
     <div className="flex items-center space-x-4">
       <button
         onClick={Image_detection}
         className="bg-yellow-400 text-black font-semibold px-4 py-2 rounded hover:bg-yellow-500 shadow"
       >
-        Disease Predictor
+       Disease Predictor
       </button>
-
-      {/* <button className="bg-white text-green-700 font-medium px-3 py-1 rounded hover:bg-gray-100">
-        मराठी / हिंदी
-      </button> */}
 
       {/* Profile Dropdown */}
       <div className="relative">
@@ -258,7 +268,6 @@ const FactoryList = () => {
           className="w-10 h-10 rounded-full border-2 border-white shadow cursor-pointer"
           onClick={() => setDropdownOpen(!dropdownOpen)}
         />
-
         {dropdownOpen && (
           <div className="absolute right-0 mt-2 w-48 bg-white text-black rounded-md shadow-lg p-4">
             <p className="font-semibold text-center mb-2">{farmerData.name || "Farmer"}</p>
@@ -266,7 +275,7 @@ const FactoryList = () => {
               className="w-full bg-red-600 text-white py-1 rounded hover:bg-red-700"
               onClick={handleLogout}
             >
-              Logout
+              🔒 Logout
             </button>
           </div>
         )}
@@ -277,40 +286,38 @@ const FactoryList = () => {
   {/* Main Layout */}
   <div className="flex p-4 gap-4">
     {/* Sidebar */}
-    <aside className="w-1/4 bg-white rounded-xl shadow p-4 space-y-6">
+    <aside className="w-1.5/4 bg-white rounded-xl shadow p-4 space-y-6">
+      {/* Previous Orders */}
       <section>
-        <h2 className="text-lg font-semibold mb-3">Previous Orders</h2>
+        <h2 className="text-lg font-semibold mb-3">📦 Previous Orders</h2>
         <div className="space-y-2 max-h-80 overflow-y-auto pr-2">
-          {previousOrders.map((order) => (
+          {prevOrders.map((order) => (
             <div
-              key={order.id}
+              key={order._id}
               className="border-l-4 pl-2 border-green-600 bg-green-50 p-2 rounded shadow"
             >
-              <p className="font-bold">Order #{order.id}</p>
-              <p className="text-sm text-gray-700">{order.date}</p>
-              <span className={
-                order.status === "Completed"
-                  ? "text-green-600"
-                  : "text-yellow-600"
-              }>
-                {order.status}
-              </span>
+              <p className="font-bold">#️⃣ Order ID: <span className="text-green-700">{order._id}</span></p>
+              <p className="font-bold">🏭 Factory ID: <span className="text-green-700">{order.factoryId}</span></p>
+              <p className="font-bold">💳 Payment ID: <span className="text-green-700">{order.paymentId}</span></p>
+              <p className="font-bold">💰 Amount: ₹{order.amount}</p>
             </div>
           ))}
         </div>
       </section>
 
+      {/* Rewards */}
       <section>
-        <h2 className="text-lg font-semibold mb-3">Rewards & Certificates</h2>
+        <h2 className="text-lg font-semibold mb-3">🎖 Rewards & Certificates</h2>
         <button className="bg-indigo-600 text-white px-3 py-2 rounded hover:bg-indigo-700 w-full shadow">
-          Download Certificate
+          ⬇️ Download Certificate
         </button>
-        <p className="text-sm text-gray-600 mt-1">Pending approval</p>
+        <p className="text-sm text-gray-600 mt-1">⏳ Pending approval</p>
       </section>
 
+      {/* Reports */}
       <section>
-        <h2 className="text-lg font-semibold mb-3">Transparency Reports</h2>
-        <div className="text-sm text-gray-700">
+        <h2 className="text-lg font-semibold mb-3">📊 Transparency Reports</h2>
+        <div className="text-sm text-gray-700 space-y-1">
           <p>● Order History</p>
           <p>● Supply Chain Graph</p>
           <p>● Government Schemes</p>
@@ -321,7 +328,7 @@ const FactoryList = () => {
     {/* Main Content */}
     <main className="flex-1">
       <section className="bg-white p-6 rounded-xl shadow">
-        <h2 className="text-2xl font-bold text-green-800 mb-6">Requests from Ethanol Factories</h2>
+        <h2 className="text-2xl font-bold text-green-800 mb-6">🏭 Requests from Ethanol Factories</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {factories.map((factory) => (
             <div
@@ -331,16 +338,16 @@ const FactoryList = () => {
               <h3 className="text-xl font-semibold text-green-800 uppercase">
                 {factory.factoryName}
               </h3>
-              <p className="text-gray-700 mt-2"><strong>Address:</strong> {factory.factoryAddress}</p>
-              <p className="text-gray-700"><strong>Contact:</strong> {factory.contactPersonName}</p>
-              <p className="text-gray-700"><strong>GST:</strong> {factory.gstNumber}</p>
-              <p className="text-gray-700"><strong>Crops:</strong> {factory.typesOfCropsUsed.join(', ')}</p>
-              <p className="text-gray-700"><strong>Incentives:</strong> {factory.subsidyOrIncentiveSchemes}</p>
+              <p className="text-gray-700 mt-2">📍 <strong>Address:</strong> {factory.factoryAddress}</p>
+              <p className="text-gray-700">📞 <strong>Contact:</strong> {factory.contactPersonName}</p>
+              <p className="text-gray-700">🧾 <strong>GST:</strong> {factory.gstNumber}</p>
+              <p className="text-gray-700">🌾 <strong>Crops:</strong> {factory.typesOfCropsUsed.join(', ')}</p>
+              <p className="text-gray-700">💸 <strong>Incentives:</strong> {factory.subsidyOrIncentiveSchemes}</p>
               <button
                 className="mt-4 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
                 onClick={changeLabelApprovedFactories}
               >
-                Send Proposal
+                ➤ Send Proposal
               </button>
             </div>
           ))}
@@ -349,7 +356,7 @@ const FactoryList = () => {
     </main>
   </div>
 
-  {/* Modals */}
+  {/* Receipt Modal */}
   {showPopup && (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-white p-6 rounded-lg shadow-lg relative w-[32rem]">
@@ -364,13 +371,14 @@ const FactoryList = () => {
     </div>
   )}
 
+  {/* Proposal Modal */}
   {isModalOpen && selectedFactory && (
     <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
       <div className="bg-white p-6 rounded-lg shadow-md max-w-md w-full">
-        <h2 className="text-lg font-bold mb-4">Send Proposal to {selectedFactory.name}</h2>
+        <h2 className="text-lg font-bold mb-4">📤 Send Proposal to {selectedFactory.name}</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block font-medium mb-1">Quantity to Supply (tons)</label>
+            <label className="block font-medium mb-1">📦 Quantity to Supply (tons)</label>
             <input
               type="number"
               id="quantity"
@@ -383,7 +391,7 @@ const FactoryList = () => {
           </div>
 
           <div>
-            <label className="block font-medium mb-1">Delivery Date</label>
+            <label className="block font-medium mb-1">📅 Delivery Date</label>
             <input
               type="date"
               id="deliveryDate"
@@ -401,14 +409,14 @@ const FactoryList = () => {
               onClick={closeModal}
               className="bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500"
             >
-              Cancel
+              ❌ Cancel
             </button>
             <button
               type="submit"
               className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
               onClick={a}
             >
-              Submit Proposal
+              ✅ Submit Proposal
             </button>
           </div>
         </form>
@@ -416,6 +424,7 @@ const FactoryList = () => {
     </div>
   )}
 </div>
+
   );
 };
 

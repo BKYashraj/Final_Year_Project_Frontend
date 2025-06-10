@@ -16,14 +16,14 @@ import FactoryLots from './FactoryLots';
 function FactoryMenu() {
   const [farmers, setFarmers] = useState([]);
   const [Approwedfarmers, setApprowedfarmers] = useState([]);
+  const [prevOrders, setprevOrders] = useState([]);
 
-  
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  
+
 
   const factoryData = useSelector((state) => state.auth.data);
   const factoryId = factoryData.id;
@@ -32,62 +32,62 @@ function FactoryMenu() {
 
 
 
-      const [error, setError] = useState(null);
-      const factoryID = factoryData.id;
-  
-  
-    const getApprovedFactories = async () => {
-      console.log("hey useeffect")
-      setLoading(true);
-      try {
-        const response = await axiosInstance.get(`/factory/getApprovedFarmer/${factoryID}`);
-        console.log(response);
+  const [error, setError] = useState(null);
+  const factoryID = factoryData.id;
+
+
+  const getApprovedFactories = async () => {
+    console.log("hey useeffect")
+    setLoading(true);
+    try {
+      const response = await axiosInstance.get(`/factory/getApprovedFarmer/${factoryID}`);
+      console.log(response);
       //   setFarmers(response.data.data.factories);
-        setFarmers(response.data.data);
-        console.log(farmers);
-      } catch (error) {
-        console.error("Error fetching approved factories:", error);
-        setError("Failed to load approved factories.");
-      } finally {
-        setLoading(false);
-      }
-    };
-  
-    useEffect(() => {
-      getApprovedFactories();
-    }, []);
-    
+      setFarmers(response.data.data);
+      console.log(farmers);
+    } catch (error) {
+      console.error("Error fetching approved factories:", error);
+      setError("Failed to load approved factories.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    getApprovedFactories();
+  }, []);
 
 
 
 
 
 
-// Farmer Request 
+
+  // Farmer Request 
 
   const getFarmers = async () => {
     setLoading(true);
     try {
       const response = await axiosInstance.get("/farmers/getFarmer");
       setFarmers(response.data.farmers);
-      console.log("9999999999",response)
+      console.log("9999999999", response)
     } catch (error) {
       console.error("Error fetching farmers:", error);
     }
     setLoading(false);
   };
 
-  
 
-// Approved Farmer Request 
+
+  // Approved Farmer Request 
 
   const getApprovedFarmers = async () => {
     setLoading(true);
     try {
-      console.log("aaaaaaaaFcatory id",factoryId);
+      console.log("aaaaaaaaFcatory id", factoryId);
       const response2 = await axiosInstance.get(`/farmers/approvedFarmer/${factoryId}`);
-      
-      console.log("9999999999aaaaaaaaa",response2)
+
+      console.log("9999999999aaaaaaaaa", response2)
       setApprowedfarmers(response2.data.farmers2);
     } catch (error) {
       console.error("Error fetching farmers:", error);
@@ -98,6 +98,7 @@ function FactoryMenu() {
   useEffect(() => {
     getFarmers();
     getApprovedFarmers();
+    preveousOrders();
   }, []);
 
 
@@ -132,110 +133,124 @@ function FactoryMenu() {
     }
   };
 
-  
-  const previousOrders = [
-    { id: "#1234", date: "2025-02-25", status: "Completed" },
-    { id: "#1235", date: "2025-02-24", status: "Pending" },
-    { id: "#1235", date: "2025-02-24", status: "Pending" },
-    { id: "#1235", date: "2025-02-24", status: "Pending" },
-  ];
+
+  const preveousOrders = async () => {
+    setLoading(true);
+    try {
+      const response = await axiosInstance.get(`/factory/PreveousOrders/${factoryID}`);
+      console.log("aaa212121", response);
+      setprevOrders(response.data.transactions);
+    } catch (error) {
+      console.error("Error fetching approved factories:", error);
+      setError("Failed to load approved factories.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
-    <div className="min-h-screen bg-gray-50 text-gray-800">
-      {/* Header */}
-      <header className="bg-green-700 text-white py-4 px-6 flex justify-between items-center shadow-md sticky top-0 z-50">
-        <h1 className="text-2xl font-bold">Factory Dashboard</h1>
-        <div className="relative">
-          <img
-            src={image1}
-            alt="Profile"
-            className="w-10 h-10 rounded-full cursor-pointer"
-            onClick={() => setDropdownOpen(!dropdownOpen)}
-          />
-          {dropdownOpen && (
-            <div className="absolute right-0 mt-2 w-40 bg-white text-black rounded-md shadow-lg p-2">
-              <p className="text-center font-semibold">Factory</p>
-              <button
-                className="w-full bg-red-600 text-white mt-2 py-1 rounded hover:bg-red-700"
-                onClick={handleLogout}
-              >
-                Logout
-              </button>
-            </div>
-          )}
+    <div className="min-h-screen bg-gray-50 text-gray-800"> 
+  {/* ✅ Header */}
+  <header className="bg-green-700 text-white py-4 px-6 flex justify-between items-center shadow-md sticky top-0 z-50">
+    <h1 className="text-2xl font-bold">🏭 <strong>Factory Dashboard</strong></h1>
+    <div className="flex gap-4">
+      <button
+        onClick={() => navigate('/factory/lots')}
+        className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-200"
+      >
+        📦 <strong>View Ethanol Lots</strong>
+      </button>
+      <button
+        onClick={() => navigate('/factory/add-lot', { state: { factoryId } })}
+        className="bg-teal-600 text-white px-4 py-2 rounded-md hover:bg-teal-700 transition duration-200"
+      >
+        ➕ <strong>Add New Ethanol Lot</strong>
+      </button>
+    </div>
+    <div className="relative ml-4">
+      <img
+        src={image1}
+        alt="Profile"
+        className="w-10 h-10 rounded-full cursor-pointer"
+        onClick={() => setDropdownOpen(!dropdownOpen)}
+      />
+      {dropdownOpen && (
+        <div className="absolute right-0 mt-2 w-40 bg-white text-black rounded-md shadow-lg p-2">
+          <p className="text-center font-semibold">🏭 <strong>Factory</strong></p>
+          <button
+            className="w-full bg-red-600 text-white mt-2 py-1 rounded hover:bg-red-700"
+            onClick={handleLogout}
+          >
+            🔓 <strong>Logout</strong>
+          </button>
         </div>
-      </header>
+      )}
+    </div>
+  </header>
 
-      {/* Farmer Requests */}
-      <section className="px-6 py-4">
-        <h2 className="text-xl font-semibold mb-4">Farmer Requests</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {farmers.map((farmer) => (
-            <div key={farmer._id} className="bg-white p-4 rounded shadow">
-              <h3 className="text-lg font-bold">{farmer.firstName} {farmer.lastName}</h3>
-              <p>Mobile: {farmer.mobileNumber}</p>
-              <p>Email: {farmer.email}</p>
-              <p>Role: {farmer.role}</p>
-              <button
-                className="mt-2 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700"
-                onClick={() => approveFactoryForFarmer(farmer._id, factoryId)}
-              >
-                Accept Request
-              </button>
-            </div>
-          ))}
+  {/* ✅ Farmer Requests */}
+  <section className="px-6 py-6">
+    <h2 className="text-xl font-bold mb-4">🧑‍🌾 <strong>Farmer Requests</strong></h2>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {farmers.map((farmer) => (
+        <div key={farmer._id} className="bg-white p-5 rounded-xl shadow-md border">
+          <h3 className="text-lg font-bold">{farmer.firstName} {farmer.lastName}</h3>
+          <p className="text-sm mt-1">📞 <strong>Mobile:</strong> {farmer.mobileNumber}</p>
+          <p className="text-sm">📧 <strong>Email:</strong> {farmer.email}</p>
+          <p className="text-sm">👤 <strong>Role:</strong> {farmer.role}</p>
+          <button
+            className="mt-4 bg-green-600 text-white px-4 py-2 rounded-md hover:bg-green-700 transition"
+            onClick={() => approveFactoryForFarmer(farmer._id, factoryId)}
+          >
+            ✅ <strong>Accept Request</strong>
+          </button>
         </div>
-      </section>
+      ))}
+    </div>
+  </section>
 
-      {/* Action Buttons */}
-      <div className="flex gap-4 px-6 mt-4">
-        <button
-          onClick={() => navigate('/factory/lots')}
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-        >
-          View Ethanol Lots
-        </button>
-        <button
-          onClick={() => navigate('/factory/add-lot', { state: { factoryId } })}
-          className="bg-teal-600 text-white px-4 py-2 rounded hover:bg-teal-700"
-        >
-          Add New Ethanol Lot
-        </button>
-      </div>
-
-      {/* Main Content */}
-      <div className="flex flex-col lg:flex-row gap-6 px-6 py-6">
-        {/* Previous Orders */}
-        <div className="lg:w-1/3 bg-white p-4 rounded shadow">
-          <h2 className="text-lg font-semibold mb-4">Previous Orders</h2>
-          {previousOrders.map((order) => (
-            <div key={order.id} className="border-b py-2">
-              <p className="font-semibold">Order ID: {order.id}</p>
-              <p>Date: {order.date}</p>
-              <p className={order.status === 'Completed' ? 'text-green-600' : 'text-yellow-600'}>
-                {order.status}
-              </p>
-            </div>
-          ))}
-        </div>
-
-        {/* Approved Farmers */}
-        <div className="lg:w-2/3 bg-white p-4 rounded shadow">
-          <h2 className="text-lg font-semibold mb-4">Approved Farmer Details</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {Approwedfarmers.map((farmer) => (
-              <div key={farmer._id} className="bg-gray-50 p-4 rounded shadow">
-                <h3 className="text-lg font-bold">{farmer.firstName} {farmer.lastName}</h3>
-                <p>Mobile: {farmer.mobileNumber}</p>
-                <p>Email: {farmer.email}</p>
-                <p>Role: {farmer.role}</p>
-                <ProductCard farmer={farmer} factory={factoryData} />
-              </div>
-            ))}
+  {/* ✅ Main Content */}
+  <div className="flex flex-col lg:flex-row gap-6 px-6 py-4">
+    
+    {/* 🔄 Previous Orders */}
+    <section className="lg:w-[36%] bg-white p-5 rounded-xl shadow-md">
+      <h2 className="text-lg font-bold mb-4">🧾 <strong>Previous Orders</strong></h2>
+      <div className="space-y-4 max-h-80 overflow-y-auto pr-2">
+        {prevOrders.map((order) => (
+          <div
+            key={order._id}
+            className="border-l-4 pl-4 border-green-600 bg-green-50 p-3 rounded shadow-sm"
+          >
+            <p className="font-semibold">🆔 <strong>Order:</strong> {order._id}</p>
+            <p className="text-sm">🏭 <strong>Factory:</strong> {order.factoryId}</p>
+            <p className="text-sm">💳 <strong>Payment:</strong> {order.paymentId}</p>
+            <p className="text-sm font-semibold">💰 <strong>Amount:</strong> ₹{order.amount}</p>
           </div>
-        </div>
+        ))}
+      </div>
+    </section>
+
+    {/* ✅ Approved Farmers */}
+    <div className="lg:w-[64%] bg-white p-6 rounded-xl shadow-md">
+      <h2 className="text-lg font-bold mb-4">✅ <strong>Approved Farmer Details</strong></h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        {Approwedfarmers.map((farmer) => (
+          <div key={farmer._id} className="bg-gray-50 p-4 rounded shadow-sm border">
+            <h3 className="text-lg font-bold">{farmer.firstName} {farmer.lastName}</h3>
+            <p className="text-sm mt-1">📞 <strong>Mobile:</strong> {farmer.mobileNumber}</p>
+            <p className="text-sm">📧 <strong>Email:</strong> {farmer.email}</p>
+            <p className="text-sm">👤 <strong>Role:</strong> {farmer.role}</p>
+            <div className="mt-2">
+              <ProductCard farmer={farmer} factory={factoryData} />
+            </div>
+          </div>
+        ))}
       </div>
     </div>
+  </div>
+</div>
+
+
   );
 }
 
