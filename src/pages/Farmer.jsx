@@ -287,45 +287,61 @@ const preveousOrders = async () => {
   {/* Main Layout */}
   <div className="flex p-4 gap-4">
     {/* Sidebar */}
-    <aside className="w-1.5/4 bg-whiteprevOrders rounded-xl shadow p-4 space-y-6">
+    <aside className="w-2/6 bg-whiteprevOrders rounded-xl shadow p-4 space-y-6">
       {/* Previous Orders */}
      
         <section>
   <h2 className="text-lg font-semibold mb-3">📦 Previous Orders</h2>
-  <div className="space-y-2 max-h-80 overflow-y-auto pr-2">
-    {prevOrders.map((order) => (
-      <Link
-        to="/order-details"
-        state={{
-          orderId: order.blockNo,
-          farmerId : order.farmerId,
-          factoryId: order.factoryId,
-          transactionHash: order.transactionHash,
-          status: order.status,
-          amount: order.amount,
-        }}
-        key={order._id}
-        className="block"
-      >
-        <div className="border-l-4 pl-2 border-green-600 bg-green-50 p-2 rounded shadow hover:bg-green-100 transition">
-          <p className="font-bold">
-            #️⃣ Order ID: <span className="text-green-700">{order.blockNo}</span>
+  <div className="space-y-3 max-h-80 overflow-y-auto pr-2">
+  {prevOrders.map((order) => (
+    <Link
+      to="/order-details"
+      state={{
+        orderId: order.blockNo,
+        farmerId: order.farmerId,
+        factoryId: order.factoryId,
+        transactionHash: order.transactionHash,
+        status: order.status,
+        amount: order.amount,
+      }}
+      key={order._id}
+      className="block"
+    >
+      <div className="border-l-4 pl-3 border-green-600 bg-green-50 p-4 rounded-lg shadow-md hover:bg-green-100 transition-all duration-300">
+        <div className="flex flex-col space-y-1 text-sm">
+          <p className="font-semibold">
+            #️⃣ <span className="text-gray-700">Order ID:</span>{" "}
+            <span className="text-green-700">{order.blockNo}</span>
           </p>
-          
-          <p className="font-bold">
-            💳 transactionHash:{" "}
-            <span className="text-green-700">
-              {order.transactionHash.substring(0, 4) + ".."}
-            </span>
+          <p className="font-semibold">
+            🏭 <span className="text-gray-700">Factory ID:</span>{" "}
+            <span className="text-green-700">{order.factoryId}</span>
           </p>
-          <p className="font-bold">
-            💳 Payment Status: <span className="text-green-700">{order.status}</span>
+          <p className="font-semibold">
+            🔗 <span className="text-gray-700">Transaction Hash:</span>{" "}
+            <span className="text-green-700 break-all">{order.transactionHash}</span>
           </p>
-          <p className="font-bold">💰 Amount: ₹{order.amount}</p>
+          <p className="font-semibold">
+            💰 <span className="text-gray-700">Amount:</span> ₹
+            <span className="text-green-700">{order.amount}</span>
+          </p>
+          <p className="font-semibold">
+            📦 <span className="text-gray-700">Status:</span>{" "}
+            <span className="text-green-700">{order.status}</span>
+          </p>
+
+          {/* Transparency Button */}
+          <button
+            className="mt-2 self-start bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 transition"
+          >
+            🔍 View Transparency
+          </button>
         </div>
-      </Link>
-    ))}
-  </div>
+      </div>
+    </Link>
+  ))}
+</div>
+
 </section>
 
       {/* Rewards */}
