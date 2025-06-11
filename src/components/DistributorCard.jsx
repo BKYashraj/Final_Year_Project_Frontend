@@ -13,13 +13,13 @@ import toast, { Toaster } from "react-hot-toast";
 import axiosInstance from '../Helper/axiosInstance.js';
 
 
-export default function ProductCard({ farmer, factory ,amt}) {
+export default function DistributorCard({ farmer, factory, amt }) {
     const [amount, setamount] = useState(amt);
 
     const handlePayment = async () => {
         try {
-          const response = await axiosInstance.post("/payment/order", { amount,
-            farmerId: farmer._id,  // ✅ Include farmerId
+          const response = await axiosInstance.post("/distributor_payment/order", { amount,
+            farmerId: farmer.factoryId,  // ✅ Include farmerId
             factoryId: factory.id   // ✅ Include factoryId 
           });
 
@@ -48,12 +48,12 @@ export default function ProductCard({ farmer, factory ,amt}) {
             handler: async (response) => {
                 console.log("response", response)
                 try {
-                    const res = await axiosInstance.post("/payment/verify", 
+                    const res = await axiosInstance.post("/distributor_payment/verify", 
                         {
                             razorpay_order_id: response.razorpay_order_id,
                             razorpay_payment_id: response.razorpay_payment_id,
                             razorpay_signature: response.razorpay_signature,
-                            farmerId: farmer._id,
+                            farmerId: farmer.factoryId,
                             factoryId: factory.id
                         }
                     )
@@ -86,7 +86,7 @@ export default function ProductCard({ farmer, factory ,amt}) {
 
 
 // ✅ Add PropTypes for validation
-ProductCard.propTypes = {
+DistributorCard.propTypes = {
     farmer: PropTypes.shape({
         _id: PropTypes.string.isRequired,
         firstName: PropTypes.string.isRequired,

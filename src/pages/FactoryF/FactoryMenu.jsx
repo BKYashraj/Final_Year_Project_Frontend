@@ -241,7 +241,8 @@ function FactoryMenu() {
             <p className="text-sm">📧 <strong>Email:</strong> {farmer.email}</p>
             <p className="text-sm">👤 <strong>Role:</strong> {farmer.role}</p>
             <div className="mt-2">
-              <ProductCard farmer={farmer} factory={factoryData} />
+              <ProductCard farmer={farmer} factory={factoryData} amt={Math.floor(Math.random() * (15000 - 5000 + 1)) + 5000}
+/>
             </div>
           </div>
         ))}

@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../Redux/Slices/AuthSlice";
 import image1 from "../assets/Home Page Images/profile.jpg"; // replace with actual image
+import ProductCard from "../components/ProductCard";
+import DistributorCard from "../components/DistributorCard";
 
 const Distributors = () => {
   const [lots, setLots] = useState([]);
@@ -64,7 +66,7 @@ const Distributors = () => {
                 />
                 {dropdownOpen && (
                   <div className="absolute right-0 mt-2 w-40 bg-white text-black rounded-md shadow-lg p-2">
-                    <p className="text-center font-semibold">Distributor</p>
+                    <p className="text-center font-semibold">Factory</p>
                    <button
                 className="w-full bg-red-600 text-white mt-2 py-1 rounded hover:bg-red-700"
                 onClick={handleLogout}
@@ -92,17 +94,22 @@ const Distributors = () => {
                 key={lot._id}
                 className="bg-white p-4 rounded shadow border border-gray-200"
               >
-                <h3 className="text-lg font-bold">{lot.factoryName}</h3>
+                <h3 className="text-lg font-bold">{lot.factoryId}</h3>
                 <p><span className="font-medium">Name of Factory:</span> {lot.name}</p>
                 <p><span className="font-medium">Quantity:</span> {lot.quantity} liters</p>
                 <p><span className="font-medium">Price/Liter:</span> ₹{lot.pricePerLiter}</p>
                 <p><span className="font-medium">Total:</span> ₹{lot.quantity * lot.pricePerLiter}</p>
-                <button
+                {/* <button
                   className="mt-3 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 w-full"
                   onClick={() => handlePayFactory(lot.factoryId)}
                 >
                   Pay Factory
-                </button>
+                </button> */}
+
+                <div className="mt-2">
+                              <DistributorCard farmer={lot} factory={userData} amt={lot.quantity * lot.pricePerLiter} />
+                            </div>
+                          
               </div>
             ))
           ) : (
