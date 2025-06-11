@@ -64,7 +64,7 @@ const Distributors = () => {
                 />
                 {dropdownOpen && (
                   <div className="absolute right-0 mt-2 w-40 bg-white text-black rounded-md shadow-lg p-2">
-                    <p className="text-center font-semibold">Factory</p>
+                    <p className="text-center font-semibold">Distributor</p>
                    <button
                 className="w-full bg-red-600 text-white mt-2 py-1 rounded hover:bg-red-700"
                 onClick={handleLogout}

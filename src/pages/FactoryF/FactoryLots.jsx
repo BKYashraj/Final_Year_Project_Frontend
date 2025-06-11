@@ -24,6 +24,12 @@ function FactoryLots() {
   }, [factoryId]);
 
   return (
+    <div>
+      <header className="bg-green-700 text-white py-4 px-6 flex justify-between items-center shadow-md sticky top-0 z-50">
+          <h1 className="text-2xl font-bold">🏭 <strong>Factory Dashboard</strong></h1>
+          
+          
+        </header>
     <div className="min-h-screen bg-gray-100 px-4 py-10">
       <div className="max-w-5xl mx-auto bg-white p-6 rounded-2xl shadow-md">
         <h1 className="text-3xl font-bold text-gray-800 mb-6 text-center">Ethanol Lots</h1>
@@ -48,6 +54,8 @@ function FactoryLots() {
         )}
       </div>
     </div>
+    </div>
+
   );
 }
 

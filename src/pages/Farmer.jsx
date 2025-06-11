@@ -306,23 +306,23 @@ const preveousOrders = async () => {
       </section>
 
       {/* Rewards */}
-      <section>
+      {/* <section>
         <h2 className="text-lg font-semibold mb-3">🎖 Rewards & Certificates</h2>
         <button className="bg-indigo-600 text-white px-3 py-2 rounded hover:bg-indigo-700 w-full shadow">
           ⬇️ Download Certificate
         </button>
         <p className="text-sm text-gray-600 mt-1">⏳ Pending approval</p>
-      </section>
+      </section> */}
 
       {/* Reports */}
-      <section>
+      {/* <section>
         <h2 className="text-lg font-semibold mb-3">📊 Transparency Reports</h2>
         <div className="text-sm text-gray-700 space-y-1">
           <p>● Order History</p>
           <p>● Supply Chain Graph</p>
           <p>● Government Schemes</p>
         </div>
-      </section>
+      </section> */}
     </aside>
 
     {/* Main Content */}

@@ -49,6 +49,13 @@ function ImagePredictor() {
   };
 
   return (
+    <div>
+
+    
+    <header className="bg-green-700 text-white py-4 px-6 flex justify-between items-center shadow-lg sticky top-0 z-50">
+        <h1 className="text-2xl font-bold tracking-wide">🌿 Farmer Dashboard</h1>
+    
+      </header>
     <div className="max-w-xl mx-auto mt-10 p-6 bg-white shadow-lg rounded-xl border border-gray-200">
       <h2 className="text-2xl font-bold text-center mb-6 text-green-700">
         Sugarcane Disease Detection 🌱
@@ -86,6 +93,7 @@ function ImagePredictor() {
           </div>
         </div>
       )}
+    </div>
     </div>
   );
 }
