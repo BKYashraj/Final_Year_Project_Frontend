@@ -3,6 +3,7 @@ import abi from "../contractJson/FarmerToFactory.json";
 // import { ethers } from 'ethers';
 import { ethers } from "ethers";
 import toast from "react-hot-toast";
+import { Link } from 'react-router-dom';
 import ReceiptGenerator from "./ReceiptGenerator";
 // import FactoryMenu from "./FactoryF/FactoryMenu";
 // import FactoryAcceptedFarmerMenu from "./FarmerRelated/FactoryAcceptedFarmerMenu";
@@ -234,7 +235,7 @@ const FactoryList = () => {
 const preveousOrders = async () => {
     setLoading(true);
     try {
-      const response = await axiosInstance.get(`/farmers/PreveousOrders/${farmerId}`);
+      const response = await axiosInstance.get(`/farmers/recentOrder/${farmerId}`);
       console.log(response);
       setprevOrders(response.data.transactions);
     } catch (error) {
@@ -286,24 +287,46 @@ const preveousOrders = async () => {
   {/* Main Layout */}
   <div className="flex p-4 gap-4">
     {/* Sidebar */}
-    <aside className="w-1.5/4 bg-white rounded-xl shadow p-4 space-y-6">
+    <aside className="w-1.5/4 bg-whiteprevOrders rounded-xl shadow p-4 space-y-6">
       {/* Previous Orders */}
-      <section>
-        <h2 className="text-lg font-semibold mb-3">📦 Previous Orders</h2>
-        <div className="space-y-2 max-h-80 overflow-y-auto pr-2">
-          {prevOrders.map((order) => (
-            <div
-              key={order._id}
-              className="border-l-4 pl-2 border-green-600 bg-green-50 p-2 rounded shadow"
-            >
-              <p className="font-bold">#️⃣ Order ID: <span className="text-green-700">{order._id}</span></p>
-              <p className="font-bold">🏭 Factory ID: <span className="text-green-700">{order.factoryId}</span></p>
-              <p className="font-bold">💳 Payment ID: <span className="text-green-700">{order.paymentId}</span></p>
-              <p className="font-bold">💰 Amount: ₹{order.amount}</p>
-            </div>
-          ))}
+     
+        <section>
+  <h2 className="text-lg font-semibold mb-3">📦 Previous Orders</h2>
+  <div className="space-y-2 max-h-80 overflow-y-auto pr-2">
+    {prevOrders.map((order) => (
+      <Link
+        to="/order-details"
+        state={{
+          orderId: order.blockNo,
+          farmerId : order.farmerId,
+          factoryId: order.factoryId,
+          transactionHash: order.transactionHash,
+          status: order.status,
+          amount: order.amount,
+        }}
+        key={order._id}
+        className="block"
+      >
+        <div className="border-l-4 pl-2 border-green-600 bg-green-50 p-2 rounded shadow hover:bg-green-100 transition">
+          <p className="font-bold">
+            #️⃣ Order ID: <span className="text-green-700">{order.blockNo}</span>
+          </p>
+          
+          <p className="font-bold">
+            💳 transactionHash:{" "}
+            <span className="text-green-700">
+              {order.transactionHash.substring(0, 4) + ".."}
+            </span>
+          </p>
+          <p className="font-bold">
+            💳 Payment Status: <span className="text-green-700">{order.status}</span>
+          </p>
+          <p className="font-bold">💰 Amount: ₹{order.amount}</p>
         </div>
-      </section>
+      </Link>
+    ))}
+  </div>
+</section>
 
       {/* Rewards */}
       {/* <section>

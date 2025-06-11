@@ -13,6 +13,7 @@ import Features from "./pages/Features";
 import Contact from "./pages/Contact";
 import FactoryLots from "./pages/FactoryF/FactoryLots";
 import AddLotForm from "./pages/FactoryF/AddLotForm";
+import OrderDetails from "./pages/FarmerRelated/OrderDetails";
 // import Home from "./pages/Home";
 
 export default function App() {
@@ -30,7 +31,8 @@ export default function App() {
 
           <Route path="/image_detection" element={<ImagePredictor />} />
           <Route path="/factory/lots" element={<FactoryLots />} />
-           <Route path="/factory/add-lot" element={<AddLotForm />} />
+          <Route path="/factory/add-lot" element={<AddLotForm />} />
+          <Route path="/order-details" element={<OrderDetails />} />
 
       </Routes>
     </>

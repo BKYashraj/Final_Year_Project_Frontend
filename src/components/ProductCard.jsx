@@ -54,7 +54,8 @@ export default function ProductCard({ farmer, factory ,amt}) {
                             razorpay_payment_id: response.razorpay_payment_id,
                             razorpay_signature: response.razorpay_signature,
                             farmerId: farmer._id,
-                            factoryId: factory.id
+                            factoryId: factory.id,
+                            amount
                         }
                     )
                     
