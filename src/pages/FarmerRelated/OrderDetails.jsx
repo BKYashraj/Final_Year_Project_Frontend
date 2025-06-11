@@ -61,11 +61,7 @@ const OrderTransparency = () => {
         <p><strong>Block For Distributor to factory Paymen</strong> {data.tx?.blockNo || 'N/A'}</p>     
       </div>
 
-       <div className="mb-4">
-        <h3 className="font-semibold">🏪 Distributor</h3>
        
-        
-      </div>
     </div>
   );
 };
