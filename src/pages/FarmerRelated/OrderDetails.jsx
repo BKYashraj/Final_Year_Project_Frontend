@@ -6,7 +6,8 @@ const OrderTransparency = () => {
   const { state } = useLocation();
   const [data, setData] = useState(null);
 
-  const { farmerId, factoryId } = state || {};
+  const { farmerId, factoryId ,transactionHash ,status,amount} = state || {};
+  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,20 +40,31 @@ const OrderTransparency = () => {
         <h3 className="font-semibold">👨‍🌾 Farmer</h3>
         <p><strong>Name:</strong> {data.farmer?.fullName || 'N/A'}</p>
         <p><strong>Mobile:</strong> {data.farmer?.mobileNumber || 'N/A'}</p>
+      
       </div>
 
       <div className="mb-4">
         <h3 className="font-semibold">🏭 Factory</h3>
         <p><strong>Name:</strong> {data.factory?.factoryName || 'N/A'}</p>
         <p><strong>Contact:</strong> {data.factory?.contactNumber || 'N/A'}</p>
+          <p><strong>TransactionHash for factory to farmer Payment</strong> {transactionHash|| 'N/A'}</p>
+        <p><strong>Payment Status</strong> {status|| 'N/A'}</p>
+        <p><strong>Amount transfer to farmer</strong> {amount|| 'N/A'}</p>
       </div>
 
       <div className="mb-4">
         <h3 className="font-semibold">🏪 Distributor</h3>
-       
         <p><strong>Name:</strong> {data.distributor?.distributorName || 'N/A'}</p>
         <p><strong>Contact:</strong> {data.distributor?.contactNumber || 'N/A'}</p>
         <p><strong>Email:</strong> {data.distributor?.email || 'N/A'}</p>
+        <p><strong>TransactionHash for Distributor to factory Payment</strong> {data.tx?.transactionHash || 'N/A'}</p>
+        <p><strong>Block For Distributor to factory Paymen</strong> {data.tx?.blockNo || 'N/A'}</p>     
+      </div>
+
+       <div className="mb-4">
+        <h3 className="font-semibold">🏪 Distributor</h3>
+       
+        
       </div>
     </div>
   );
