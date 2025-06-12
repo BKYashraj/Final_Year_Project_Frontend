@@ -143,7 +143,7 @@ const FactoryList = () => {
     setLoading(true);
     try {
       const response = await axiosInstance.get(`/farmers/${farmerId}`);
-      console.log(response);
+      console.log("farmerrrrr",response);
       setFactories(response.data.data.factories);
     } catch (error) {
       console.error("Error fetching approved factories:", error);
@@ -168,7 +168,7 @@ const FactoryList = () => {
 
   useEffect(() => {
     getApprovedFactories();
-    // preveousOrders();
+    preveousOrders();
   }, []);
 
   if (loading) {
@@ -232,19 +232,19 @@ const FactoryList = () => {
   //   { id: "#1235", date: "2025-02-24", status: "Pending" },
   // ];
 
-// const preveousOrders = async () => {
-//     setLoading(true);
-//     try {
-//       const response = await axiosInstance.get(`/farmers/recentOrder/${farmerId}`);
-//       console.log(response);
-//       setprevOrders(response.data.transactions);
-//     } catch (error) {
-//       console.error("Error fetching approved factories:", error);
-//       setError("Failed to load approved factories.");
-//     } finally {
-//       setLoading(false);
-//     }
-//   };
+const preveousOrders = async () => {
+    setLoading(true);
+    try {
+      const response = await axiosInstance.get(`/farmers/recentOrder/${farmerId}`);
+      console.log(response);
+      setprevOrders(response.data.transactions);
+    } catch (error) {
+      console.error("Error fetching approved factories:", error);
+      setError("Failed to load approved factories.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
 
   return (
@@ -290,7 +290,7 @@ const FactoryList = () => {
     <aside className="w-2/6 bg-whiteprevOrders rounded-xl shadow p-4 space-y-6">
       {/* Previous Orders */}
      
-        {/* <section>
+        <section>
   <h2 className="text-lg font-semibold mb-3">📦 Previous Orders</h2>
   <div className="space-y-3 max-h-80 overflow-y-auto pr-2">
   {prevOrders.map((order) => (
@@ -342,7 +342,7 @@ const FactoryList = () => {
   ))}
 </div>
 
-</section> */}
+</section>
 
       {/* Rewards */}
       {/* <section>
