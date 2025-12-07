@@ -19,7 +19,7 @@ const About = () => {
                 </div>
 
                 <p className="text-center text-xl max-w-2xl mx-auto">
-                    Our mission is to revolutionize the ethanol supply chain with
+                    Our Mission is to revolutionize the ethanol supply chain with
                     cutting-edge technology. We believe in creating a transparent and
                     efficient system that benefits producers, distributors, and the
                     environment alike.
